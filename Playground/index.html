@@ -1,0 +1,101 @@
+<html>
+<head>
+    <title>Three.js Playground</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+
+    <script src="js/three.js"></script>
+    <script src="js/OrbitControls.js"></script>
+
+    <script>
+        // WORLD, things in
+        var scene = new THREE.Scene();
+
+        // CAMERA how you see the scene
+        // args: fov, ration of browser, near clipping plane, far clipping plane
+        var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+        // camera position
+        camera.position.z = 3;
+
+        //RENDERER
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+
+        //Update viewport on resize, resizing the window more responsive 
+        window.addEventListener ('resize', function(){
+            var width = window.innerWidth;
+            var  height = window.innerHeight;
+            renderer.setSize(width, height);
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+        });
+
+        //CONTROLS
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+        //BOX
+        // create the shape
+        var geometry = new THREE.BoxGeometry(1, 1, 1);
+        var cubeMaterials = [
+            new THREE.MeshBasicMaterial({ color: 0xFFFFFF, side: THREE.DoubleSide }), // RIGHT SIDE
+            new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'img/pacman.png'), side: THREE.DoubleSide }), // LEFT SIDE
+            new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'img/pacman.png'), side: THREE.DoubleSide }), // TOP SIDE
+            new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'img/pacman.png'), side: THREE.DoubleSide }), // BOTTOM SIDE
+            new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'img/pacman.png'), side: THREE.DoubleSide }), // FRONT SIDE
+            new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'img/pacman.png'), side: THREE.DoubleSide }), // BACK SIDE
+
+        ]
+
+        //TEXTURES AND MATERIALS, color or image texture
+        // var material = new THREE.MeshBasicMaterial({color:0xFFFFFF, wireframe: false}); //Basic material
+        var material = new THREE.MeshFaceMaterial(cubeMaterials)
+        
+        var cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+        //BOX END
+
+        //SPHERE
+        // var sphereGeometry = new THREE.SphereGeometry( 1, 20, 20 );
+
+        // var material = new THREE.MeshBasicMaterial( {color: 0xffff00, wireframe: true} );
+        // var sphere = new THREE.Mesh( sphereGeometry, material );
+        // scene.add( sphere );    
+
+
+        //GAME LOGIC
+        var update = function(){
+            //rotate the cube and sphere
+            // cube.rotation.x += 0.01;
+            // cube.rotation.y += 0.005;
+
+            // sphere.rotation.x += 0.01;
+            // sphere.rotation.y += 0.005;
+        };
+
+        //DRAW SCENE. Put everything that we want to be drawing
+        var render = function(){
+
+            renderer.render( scene, camera);
+
+        };
+
+        //GAME LOOP ( update, render, repeat)
+        var GameLoop = function (  ){
+
+            //allows it to run every single frame
+            requestAnimationFrame( GameLoop );
+
+            update();
+            render();
+
+        }
+        //runs the game loop at least once
+        GameLoop();
+    </script>
+</body>
+</html>
