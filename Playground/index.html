@@ -11,16 +11,33 @@
     <script src="js/OrbitControls.js"></script>
 
     <script>
-        // WORLD, things in
+        // WORLD, things in ------------------------------------------------------
         var scene = new THREE.Scene();
 
-        // CAMERA how you see the scene
+        // CAMERA how you see the scene ------------------------------------------------------
         // args: fov, ration of browser, near clipping plane, far clipping plane
         var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000 );
         // camera position
         camera.position.z = 3;
 
-        //RENDERER
+        //LIGHTING ------------------------------------------------------
+        var ambientLight = new THREE.AmbientLight(0xFFFFFF, 5.0);
+        scene.add(ambientLight);
+
+        //args = color, intensity, distance
+        var pointLight = new THREE.PointLight(0xFF00FF, 4, 50);
+        // scene.add(pointLight);
+
+        var directionalLight = new THREE.DirectionalLight(0xFFFFFF, 1);
+        directionalLight.position.set(0,1,0);
+        // scene.add(directionalLight);
+
+        var spotLight = new THREE.SpotLight(0xFFFFFF, 1);
+        spotLight.position.set(0,1,0);
+        // scene.add(spotLight);
+
+
+        //RENDERER ------------------------------------------------------
         var renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
@@ -35,23 +52,23 @@
             camera.updateProjectionMatrix();
         });
 
-        //CONTROLS
+        //CONTROLS ------------------------------------------------------
         controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-        //BOX
+        //BOX ------------------------------------------------------
         // create the shape
         var geometry = new THREE.BoxGeometry(1, 1, 1);
         var cubeMaterials = [
-            new THREE.MeshBasicMaterial({ color: 0xFFFFFF, side: THREE.DoubleSide }), // RIGHT SIDE
-            new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'img/pacman.png'), side: THREE.DoubleSide }), // LEFT SIDE
-            new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'img/pacman.png'), side: THREE.DoubleSide }), // TOP SIDE
-            new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'img/pacman.png'), side: THREE.DoubleSide }), // BOTTOM SIDE
-            new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'img/pacman.png'), side: THREE.DoubleSide }), // FRONT SIDE
-            new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'img/pacman.png'), side: THREE.DoubleSide }), // BACK SIDE
+            new THREE.MeshLambertMaterial({ color: 0x00FF00, side: THREE.DoubleSide }), // RIGHT SIDE
+            new THREE.MeshLambertMaterial({ map: new THREE.TextureLoader().load( 'img/pacman.png'), side: THREE.DoubleSide }), // LEFT SIDE
+            new THREE.MeshLambertMaterial({ map: new THREE.TextureLoader().load( 'img/pacman.png'), side: THREE.DoubleSide }), // TOP SIDE
+            new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load( 'img/pacman.png'), side: THREE.DoubleSide }), // BOTTOM SIDE
+            new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load( 'img/pacman.png'), side: THREE.DoubleSide }), // FRONT SIDE
+            new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load( 'img/pacman.png'), side: THREE.DoubleSide }), // BACK SIDE
 
         ]
 
-        //TEXTURES AND MATERIALS, color or image texture
+        //TEXTURES AND MATERIALS, color or image texture ------------------------------------------------------
         // var material = new THREE.MeshBasicMaterial({color:0xFFFFFF, wireframe: false}); //Basic material
         var material = new THREE.MeshFaceMaterial(cubeMaterials)
         
@@ -67,8 +84,15 @@
         // scene.add( sphere );    
 
 
-        //GAME LOGIC
+        //GAME LOGIC ------------------------------------------------------
         var update = function(){
+            //moving light (or animate object in general)
+            var time = Date.now() * 0.0005;
+            pointLight.position.x= Math.sin(time * 0.7) * 30;
+            pointLight.position.y= Math.cos(time * 0.5) * 30;
+            pointLight.position.z= Math.cos(time * 0.3) * 30;
+
+
             //rotate the cube and sphere
             // cube.rotation.x += 0.01;
             // cube.rotation.y += 0.005;
@@ -77,14 +101,14 @@
             // sphere.rotation.y += 0.005;
         };
 
-        //DRAW SCENE. Put everything that we want to be drawing
+        //DRAW SCENE. Put everything that we want to be drawing ------------------------------------------------------
         var render = function(){
 
-            renderer.render( scene, camera);
+            renderer.render(scene, camera);
 
         };
 
-        //GAME LOOP ( update, render, repeat)
+        //GAME LOOP ( update, render, repeat) ------------------------------------------------------
         var GameLoop = function (  ){
 
             //allows it to run every single frame
