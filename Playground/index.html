@@ -38,18 +38,18 @@
         // scene.add(spotLight);
 
         //MODEL LOADER ------------------------------------------------------
-        var loader = new THREE.OBJLoader();
+        // var loader = new THREE.OBJLoader();
         //loading the particular model
         //(Grab right js file??)
-        loader.load(
+        // loader.load(
             // 'models/model.json',
-            'models/Big-Tree-06.obj',
+            // 'models/Big-Tree-06.obj',
 
             //method gets called once model is loaded
-            function(object){
-                scene.add(object);
-            }
-        )
+        //     function(object){
+        //         scene.add(object);
+        //     }
+        // )
 
 
         //RENDERER ------------------------------------------------------
@@ -72,23 +72,23 @@
 
         //BOX ------------------------------------------------------
         // create the shape
-        // var geometry = new THREE.BoxGeometry(1, 1, 1);
-        // var cubeMaterials = [
-        //     new THREE.MeshLambertMaterial({ color: 0x00FF00, side: THREE.DoubleSide }), // RIGHT SIDE
-        //     new THREE.MeshLambertMaterial({ map: new THREE.TextureLoader().load( 'img/pacman.png'), side: THREE.DoubleSide }), // LEFT SIDE
-        //     new THREE.MeshLambertMaterial({ map: new THREE.TextureLoader().load( 'img/pacman.png'), side: THREE.DoubleSide }), // TOP SIDE
-        //     new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load( 'img/pacman.png'), side: THREE.DoubleSide }), // BOTTOM SIDE
-        //     new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load( 'img/pacman.png'), side: THREE.DoubleSide }), // FRONT SIDE
-        //     new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load( 'img/pacman.png'), side: THREE.DoubleSide }), // BACK SIDE
+        var geometry = new THREE.BoxGeometry(1, 1, 1);
+        var cubeMaterials = [
+            new THREE.MeshLambertMaterial({ color: 0x00FF00, side: THREE.DoubleSide }), // RIGHT SIDE
+            new THREE.MeshLambertMaterial({ map: new THREE.TextureLoader().load( 'img/pacman.png'), side: THREE.DoubleSide }), // LEFT SIDE
+            new THREE.MeshLambertMaterial({ map: new THREE.TextureLoader().load( 'img/pacman.png'), side: THREE.DoubleSide }), // TOP SIDE
+            new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load( 'img/pacman.png'), side: THREE.DoubleSide }), // BOTTOM SIDE
+            new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load( 'img/pacman.png'), side: THREE.DoubleSide }), // FRONT SIDE
+            new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load( 'img/pacman.png'), side: THREE.DoubleSide }), // BACK SIDE
 
-        // ]
+        ]
 
         //TEXTURES AND MATERIALS, color or image texture ------------------------------------------------------
-        // var material = new THREE.MeshBasicMaterial({color:0xFFFFFF, wireframe: false}); //Basic material
-        // var material = new THREE.MeshFaceMaterial(cubeMaterials)
+        var material = new THREE.MeshBasicMaterial({color:0xFFFFFF, wireframe: false}); //Basic material
+        var material = new THREE.MeshFaceMaterial(cubeMaterials)
         
-        // var cube = new THREE.Mesh(geometry, material);
-        // scene.add(cube);
+        var cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
         //BOX END
 
         //SPHERE
