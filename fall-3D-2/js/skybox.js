@@ -18,4 +18,4 @@ var skyboxMaterials =
 //puts it together and adds it to the scene
 var skyboxMaterial = new THREE.MeshFaceMaterial( skyboxMaterials );
 var skybox = new THREE.Mesh(skyboxGeometry, skyboxMaterial);
-scene.add ( skybox );
+// scene.add ( skybox );
