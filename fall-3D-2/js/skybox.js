@@ -1,17 +1,17 @@
 // 'use strict';
 
 //Creating the skybox cube
-var skyboxGeometry = new THREE.CubeGeometry(1000, 1000, 1000);
+var skyboxGeometry = new THREE.CubeGeometry(1500, 1500, 1500);
 
 //adding textures to each side of the skybox cube
 var skyboxMaterials = 
 [    
-    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( "skyboxTextures/blue_front.png" ), side: THREE.DoubleSide }),
-    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( "skyboxTextures/blue_back.png" ), side: THREE.DoubleSide }),
-    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( "skyboxTextures/blue_up.png" ), side: THREE.DoubleSide }),
-    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( "skyboxTextures/blue_down.png" ), side: THREE.DoubleSide }),
-    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( "skyboxTextures/blue_right.png" ), side: THREE.DoubleSide }),
-    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( "skyboxTextures/blue_left.png" ), side: THREE.DoubleSide })
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( "../js/skyboxTextures/blue_front.png" ), side: THREE.DoubleSide }),
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( "../js/skyboxTextures/blue_back.png" ), side: THREE.DoubleSide }),
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( "../js/skyboxTextures/blue_up.png" ), side: THREE.DoubleSide }),
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( "../js/skyboxTextures/blue_down.png" ), side: THREE.DoubleSide }),
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( "../js/skyboxTextures/blue_right.png" ), side: THREE.DoubleSide }),
+    new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( "../js/skyboxTextures/blue_left.png" ), side: THREE.DoubleSide })
 ];
 
 
@@ -21,12 +21,12 @@ var skybox = new THREE.Mesh(skyboxGeometry, skyboxMaterial);
 // scene.add ( skybox );
 
 scene.background = new THREE.CubeTextureLoader()
-	.setPath( 'skyboxTextures/' )
+	.setPath( '../js/skyboxTextures/' )
 	.load( [
-		'skyboxTextures/blue_front.png',
-		'skyboxTextures/blue_back.png',
-		'skyboxTextures/blue_up.png',
-		'skyboxTextures/blue_down.png',
-		'skyboxTextures/blue_right.png',
-		'skyboxTextures/blue_left.png'
+		'blue_front.png',
+		'blue_back.png',
+		'blue_up.png',
+		'blue_down.png',
+		'blue_right.png',
+		'blue_left.png'
 	] );
