@@ -19,3 +19,14 @@ var skyboxMaterials =
 var skyboxMaterial = new THREE.MeshFaceMaterial( skyboxMaterials );
 var skybox = new THREE.Mesh(skyboxGeometry, skyboxMaterial);
 // scene.add ( skybox );
+
+scene.background = new THREE.CubeTextureLoader()
+	.setPath( 'skyboxTextures/' )
+	.load( [
+		'skyboxTextures/blue_front.png',
+		'skyboxTextures/blue_back.png',
+		'skyboxTextures/blue_up.png',
+		'skyboxTextures/blue_down.png',
+		'skyboxTextures/blue_right.png',
+		'skyboxTextures/blue_left.png'
+	] );
