@@ -126,3 +126,13 @@ var particleMaterial = new THREE.PointsMaterial( { color: 0x888888 } );
 var particleField = new THREE.Points( particleGeometry, particleMaterial );
 
 scene.add( particleField );
+
+var updateParticles = function ( ) {
+
+	var time = new Date.now() * 0.05;
+	particleField.position.x = Math.sin (time  * 0.7) * 30;
+	particleField.position.y = Math.cos (time  * 0.5) * 30;
+	particleField.position.z = Math.cos (time  * 0.3) * 30;
+
+
+};

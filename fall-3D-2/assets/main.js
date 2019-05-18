@@ -34,7 +34,7 @@ function init() {
 
   scene = new THREE.Scene();
   scene.background = new THREE.Color( 0xffffff );
-  // scene.fog = new THREE.Fog( 0xffffff, 0, 750 );
+  scene.fog = new THREE.Fog( 0xffffff, 0, 750 );
 
   let light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 0.75 );
   light.position.set( 0.5, 1, 0.75 );
@@ -94,7 +94,7 @@ function init() {
         break;
 
       case 32: // space
-        if ( canJump === true ) velocity.y += 600; //changing from 350 for testing
+        if ( canJump === true ) velocity.y += 500; //changing from 350 for testing
         canJump = false;
         break;
 
@@ -256,8 +256,8 @@ function animate() {
     direction.x = Number( moveLeft ) - Number( moveRight );
     direction.normalize(); // this ensures consistent movements in all directions
 
-    if ( moveForward || moveBackward ) velocity.z -= direction.z * 2000.0 * delta; //changing from 400 for testing
-    if ( moveLeft || moveRight ) velocity.x -= direction.x * 2000.0 * delta;
+    if ( moveForward || moveBackward ) velocity.z -= direction.z * 5000.0 * delta; //changing from 400 for testing
+    if ( moveLeft || moveRight ) velocity.x -= direction.x * 5000.0 * delta;
 
     controls.getObject().translateX( velocity.x * delta );
     controls.getObject().position.y += ( velocity.y * delta ); // new behavior
@@ -277,5 +277,6 @@ function animate() {
   }
 
   renderer.render( scene, camera );
+  updateParticles();
 
 }
