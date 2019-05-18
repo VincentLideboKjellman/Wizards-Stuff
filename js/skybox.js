@@ -24,10 +24,10 @@ var skybox = new THREE.Mesh(skyboxGeometry, skyboxMaterial);
 scene.background = new THREE.CubeTextureLoader()
 	.setPath( 'assets/skyboxTextures/' )
 	.load( [
-		'purplenebula_front.png',
-		'purplenebula_back.png',
-		'purplenebula_up.png',
-		'purplenebula_down.png',
-		'purplenebula_right.png',
-		'purplenebula_left.png'
+		'starfield_front.png',
+		'starfield_back.png',
+		'starfield_up.png',
+		'starfield_down.png',
+		'starfield_right.png',
+		'starfield_left.png'
 	] );
