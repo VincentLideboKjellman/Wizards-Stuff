@@ -22,9 +22,16 @@ let color = new THREE.Color();
 
 let mouse = new THREE.Vector2(), INTERSECTED;
 
+// RAIN 
+var particleSystem, particleCount, particles;
+
+//For animations etc ( almost like Date but better apparently)
+let clock = new THREE.Clock();
+
 
 init();
 animate();
+
 
 function init() {
   camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
@@ -162,6 +169,69 @@ function init() {
   //   objects.push( box );
   // }
 
+  //---/////////////////////////////////////////////RAIN TEST CODE
+  //---/////////////////////////////////////////////
+  ///////////////////
+    // OBJECTS  //
+    ///////////////////
+    var loader = new THREE.TextureLoader();
+    loader.crossOrigin = '';
+
+    // ///////////////////
+    // // RAIN  //
+    // ///////////////////
+    particleCount = 14000;
+    var pMaterial = new THREE.PointCloudMaterial({
+      color: 0xFFFFFF,
+      size: 0.8,
+      map: loader.load(
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/212131/raindrop2.png"
+       ),
+       blending: THREE.AdditiveBlending,
+       depthTest: false,
+       transparent: true
+    });
+
+    particles = new THREE.Geometry;
+    for (var i = 0; i < particleCount; i++) {
+        var pX = Math.random()*500 - 250,
+            pY = Math.random()*500 - 250,
+            pZ = Math.random()*500 - 250,
+            particle = new THREE.Vector3(pX, pY, pZ);
+        particle.velocity = {};
+        particle.velocity.y = 0;
+        particles.vertices.push(particle);
+    }
+    particleSystem = new THREE.PointCloud(particles, pMaterial);
+    scene.add(particleSystem);
+
+
+  //---/////////////////////////////////////////////END RAIN CODE
+  //---/////////////////////////////////////////////
+  
+  //---/////////////////////////////////////////////RAIN TEST SIMULATION
+  //---/////////////////////////////////////////////RAIN TEST
+
+function simulateRain() {
+  var pCount = particleCount;
+  while (pCount--) {
+  var particle = particles.vertices[pCount];
+  if (particle.y < -200) {
+    particle.y = 200;
+    particle.velocity.y = 0;
+  }
+  particle.velocity.y -= Math.random() * 2;
+  particle.y += particle.velocity.y;
+  }
+  particles.verticesNeedUpdate = true;
+};
+
+//---/////////////////////////////////////////////RAIN TEST SIMULATION
+  //---/////////////////////////////////////////////RAIN TEST
+
+
+  
+
   renderer = new THREE.WebGLRenderer( { antialias: true } );
   renderer.setPixelRatio( window.devicePixelRatio );
   renderer.setSize( window.innerWidth, window.innerHeight );
@@ -230,5 +300,7 @@ function animate() {
     // }
     // prevTime = time;
   }
+  particleSystem.rotation.y += 0.0015;
+  simulateRain();
   renderer.render( scene, camera );
 }
