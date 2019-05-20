@@ -1,43 +1,43 @@
 
 var particleSystem, particleCount, particles;
 
-function rainInit() {
+// function rainInit() {
 
-    ///////////////////
-    // OBJECTS  //
-    ///////////////////
-    var loader = new THREE.TextureLoader();
-    loader.crossOrigin = '';
+//     ///////////////////
+//     // OBJECTS  //
+//     ///////////////////
+//     var loader = new THREE.TextureLoader();
+//     loader.crossOrigin = '';
 
-    ///////////////////
-    // RAIN  //
-    ///////////////////
-    particleCount = 14000;
-    var pMaterial = new THREE.PointCloudMaterial({
-      color: 0xFFFFFF,
-      size: 0.8,
-      map: loader.load(
-        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/212131/raindrop2.png"
-       ),
-       blending: THREE.AdditiveBlending,
-       depthTest: false,
-       transparent: true
-    });
+//     ///////////////////
+//     // RAIN  //
+//     ///////////////////
+//     particleCount = 14000;
+//     var pMaterial = new THREE.PointCloudMaterial({
+//       color: 0xFFFFFF,
+//       size: 0.8,
+//       map: loader.load(
+//         "https://s3-us-west-2.amazonaws.com/s.cdpn.io/212131/raindrop2.png"
+//        ),
+//        blending: THREE.AdditiveBlending,
+//        depthTest: false,
+//        transparent: true
+//     });
 
-    particles = new THREE.Geometry;
-    for (var i = 0; i < particleCount; i++) {
-        var pX = Math.random()*500 - 250,
-            pY = Math.random()*500 - 250,
-            pZ = Math.random()*500 - 250,
-            particle = new THREE.Vector3(pX, pY, pZ);
-        particle.velocity = {};
-        particle.velocity.y = 0;
-        particles.vertices.push(particle);
-    }
-    particleSystem = new THREE.PointCloud(particles, pMaterial);
-    scene.add(particleSystem);
+//     particles = new THREE.Geometry;
+//     for (var i = 0; i < particleCount; i++) {
+//         var pX = Math.random()*500 - 250,
+//             pY = Math.random()*500 - 250,
+//             pZ = Math.random()*500 - 250,
+//             particle = new THREE.Vector3(pX, pY, pZ);
+//         particle.velocity = {};
+//         particle.velocity.y = 0;
+//         particles.vertices.push(particle);
+//     }
+//     particleSystem = new THREE.PointCloud(particles, pMaterial);
+//     scene.add(particleSystem);
     
-}
+// }
 
 function simulateRain() {
     var pCount = particleCount;
