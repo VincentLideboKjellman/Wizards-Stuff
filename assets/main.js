@@ -37,6 +37,24 @@ function init() {
   camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
   camera.position.y = 50;
 
+  ////////////// SOUNDS //////////////////////
+  // create an AudioListener and add it to the camera
+  var listener = new THREE.AudioListener();
+  camera.add( listener );
+
+  // create a global audio source
+  var sound = new THREE.Audio( listener );
+
+  // load a sound and set it as the Audio object's buffer
+  var audioLoader = new THREE.AudioLoader();
+  audioLoader.load( 'assets/sounds/rain_with_bats.wav', function( buffer ) {
+	sound.setBuffer( buffer );
+	sound.setLoop( true );
+	sound.setVolume( 0.3 );
+	sound.play();
+  });
+  ////////////// END SOUNDS //////////////////////
+
   scene = new THREE.Scene();
   scene.background = new THREE.Color( 0x000000 );
   scene.fog = new THREE.Fog( 0x000000, 0, 700 );
@@ -185,7 +203,8 @@ function init() {
       color: 0xFFFFFF,
       size: 0.8,
       map: loader.load(
-        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/212131/raindrop2.png"
+        "assets/particleImages/raindrop4.png"
+        // "https://s3-us-west-2.amazonaws.com/s.cdpn.io/212131/raindrop2.png"
        ),
        blending: THREE.AdditiveBlending,
        depthTest: false,
