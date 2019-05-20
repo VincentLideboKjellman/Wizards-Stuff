@@ -2,12 +2,12 @@ var fireplaceListener = new THREE.AudioListener();
 camera.add( fireplaceListener );
 
 var sphere = new THREE.SphereBufferGeometry( 20, 32, 16 );
-material1 = new THREE.MeshPhongMaterial( { color: 0xffaa00, flatShading: true, shininess: 0 } );
+material1 = new THREE.MeshPhongMaterial( { color: 0xffaa00, flatShading: true, shininess: 0, opacity: 0, } );
 
 // sound spheres
 var audioLoader = new THREE.AudioLoader();
 var fireplaceEmitter = new THREE.Mesh( sphere, material1 );
-fireplaceEmitter.position.set( - 250, 30, 0 );
+fireplaceEmitter.position.set( -650, -2, 36 );
 scene.add( fireplaceEmitter );
 var fireplaceSound = new THREE.PositionalAudio( fireplaceListener );
 
