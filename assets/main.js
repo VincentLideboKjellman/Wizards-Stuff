@@ -22,12 +22,14 @@ let color = new THREE.Color();
 
 let mouse = new THREE.Vector2(), INTERSECTED;
 
-// RAIN 
+// RAIN VARIABLES
 var particleSystem, particleCount, particles;
 
 //For animations etc ( almost like Date but better apparently)
 let clock = new THREE.Clock();
 
+//magic particles
+var materials = [], parameters;
 
 init();
 animate();
@@ -63,82 +65,82 @@ function init() {
   scene.add( light );
 
     //POINTERLOCKCONTROL
-  // controls = new THREE.PointerLockControls( camera );
-  //
-  // let startGame = document.querySelector('.start');
-  // let instructions = document.querySelector('.instructions');
-  //
-  // instructions.addEventListener( 'click', function () {
-  //   controls.lock();
-  // }, false );
-  //
-  // controls.addEventListener( 'lock', function () {
-  //   instructions.style.display = 'none';
-  //   startGame.style.display = 'none';
-  //   controls.lock();
-  //   camera.position.y = 50;
-  // } );
-  //
-  // controls.addEventListener( 'unlock', function () {
-  //   startGame.style.display = 'block';
-  //   instructions.style.display = 'initial';
-  // } );
-  // scene.add( controls.getObject() );
-  //
-  // let onKeyDown = function ( event ) {
-  //   switch ( event.keyCode ) {
-  //     case 38: // up
-  //     case 87: // w
-  //       moveForward = true;
-  //       break;
-  //
-  //     case 37: // left
-  //     case 65: // a
-  //       moveLeft = true;
-  //       break;
-  //
-  //     case 40: // down
-  //     case 83: // s
-  //       moveBackward = true;
-  //       break;
-  //
-  //     case 39: // right
-  //     case 68: // d
-  //       moveRight = true;
-  //       break;
-  //
-  //     case 32: // space
-  //       if ( canJump === true ) velocity.y += 350;
-  //       canJump = false;
-  //       break;
-  //   }
-  // };
-  //
-  // let onKeyUp = function ( event ) {
-  //   switch ( event.keyCode ) {
-  //     case 38: // up
-  //     case 87: // w
-  //       moveForward = false;
-  //       break;
-  //
-  //     case 37: // left
-  //     case 65: // a
-  //       moveLeft = false;
-  //       break;
-  //
-  //     case 40: // down
-  //     case 83: // s
-  //       moveBackward = false;
-  //       break;
-  //
-  //     case 39: // right
-  //     case 68: // d
-  //       moveRight = false;
-  //       break;
-  //   }
-  // };
-  // document.addEventListener( 'keydown', onKeyDown, false );
-  // document.addEventListener( 'keyup', onKeyUp, false );
+  controls = new THREE.PointerLockControls( camera );
+  
+  let startGame = document.querySelector('.start');
+  let instructions = document.querySelector('.instructions');
+  
+  instructions.addEventListener( 'click', function () {
+    controls.lock();
+  }, false );
+  
+  controls.addEventListener( 'lock', function () {
+    instructions.style.display = 'none';
+    startGame.style.display = 'none';
+    controls.lock();
+    camera.position.y = 50;
+  } );
+  
+  controls.addEventListener( 'unlock', function () {
+    startGame.style.display = 'block';
+    instructions.style.display = 'initial';
+  } );
+  scene.add( controls.getObject() );
+  
+  let onKeyDown = function ( event ) {
+    switch ( event.keyCode ) {
+      case 38: // up
+      case 87: // w
+        moveForward = true;
+        break;
+  
+      case 37: // left
+      case 65: // a
+        moveLeft = true;
+        break;
+  
+      case 40: // down
+      case 83: // s
+        moveBackward = true;
+        break;
+  
+      case 39: // right
+      case 68: // d
+        moveRight = true;
+        break;
+  
+      case 32: // space
+        if ( canJump === true ) velocity.y += 350;
+        canJump = false;
+        break;
+    }
+  };
+  
+  let onKeyUp = function ( event ) {
+    switch ( event.keyCode ) {
+      case 38: // up
+      case 87: // w
+        moveForward = false;
+        break;
+  
+      case 37: // left
+      case 65: // a
+        moveLeft = false;
+        break;
+  
+      case 40: // down
+      case 83: // s
+        moveBackward = false;
+        break;
+  
+      case 39: // right
+      case 68: // d
+        moveRight = false;
+        break;
+    }
+  };
+  document.addEventListener( 'keydown', onKeyDown, false );
+  document.addEventListener( 'keyup', onKeyUp, false );
 
   raycaster = new THREE.Raycaster();
 
@@ -187,7 +189,7 @@ function init() {
   //   objects.push( box );
   // }
 
-  //---/////////////////////////////////////////////RAIN TEST CODE
+  //---/////////////////////////////////////////////RAIN CODE
   //---/////////////////////////////////////////////
   ///////////////////
     // OBJECTS  //
@@ -201,9 +203,9 @@ function init() {
     particleCount = 14000;
     var pMaterial = new THREE.PointCloudMaterial({
       color: 0xFFFFFF,
-      size: 0.8,
+      size: 3,
       map: loader.load(
-        "assets/particleImages/raindrop4.png"
+        "assets/particleImages/raindrop3.png"
         // "https://s3-us-west-2.amazonaws.com/s.cdpn.io/212131/raindrop2.png"
        ),
        blending: THREE.AdditiveBlending,
@@ -225,11 +227,11 @@ function init() {
     scene.add(particleSystem);
 
 
-  //---/////////////////////////////////////////////END RAIN CODE
+  //---/////////////////////////////////////////////END CODE
   //---/////////////////////////////////////////////
   
-  //---/////////////////////////////////////////////RAIN TEST SIMULATION
-  //---/////////////////////////////////////////////RAIN TEST
+  //---/////////////////////////////////////////////RAIN SIMULATION
+  //---/////////////////////////////////////////////RAIN
 
 function simulateRain() {
   var pCount = particleCount;
@@ -245,8 +247,8 @@ function simulateRain() {
   particles.verticesNeedUpdate = true;
 };
 
-//---/////////////////////////////////////////////RAIN TEST SIMULATION
-  //---/////////////////////////////////////////////RAIN TEST
+//---/////////////////////////////////////////////RAIN SIMULATION
+  //---/////////////////////////////////////////////RAIN
 
 
   
@@ -259,7 +261,39 @@ function simulateRain() {
 
 
   //ORBITCONTROL
-  controls = new THREE.OrbitControls(camera, document, renderer.domElement);
+  // controls = new THREE.OrbitControls(camera, document, renderer.domElement);
+
+
+  //MAGIC PARTICLES
+  var magicParticleGeometry = new THREE.BufferGeometry();
+  var vertices = [];
+  var magicParticleTextureLoader = new THREE.TextureLoader();
+  var sprite1 = magicParticleTextureLoader.load( 'assets/particleImages/magicParticle.png' );
+
+  for ( var i = 0; i < 2000; i ++ ) {
+    var x = Math.random() * 2000 - 1000;
+    var y = Math.random() * 2000 - 1000;
+    var z = Math.random() * 2000 - 1000;
+    vertices.push( x, y, z );
+  }
+  magicParticleGeometry.addAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
+  parameters = [
+    [[ 0.90, 0.05, 0.5 ], sprite1, 10 ]
+  ];
+  for ( var i = 0; i < parameters.length; i ++ ) {
+    var color = parameters[ i ][ 0 ];
+    var sprite = parameters[ i ][ 1 ];
+    var size = parameters[ i ][ 2 ];
+    materials[ i ] = new THREE.PointsMaterial( { size: size, map: sprite, blending: THREE.AdditiveBlending, depthTest: true, transparent: true } );
+    materials[ i ].color.setHSL( color[ 0 ], color[ 1 ], color[ 2 ] );
+    var magicParticles = new THREE.Points( magicParticleGeometry, materials[ i ] );
+    magicParticles.rotation.x = Math.random() * 0.5;
+    magicParticles.rotation.y = Math.random() * 0.3;
+    magicParticles.rotation.z = Math.random() * 0.4;
+    scene.add( magicParticles );
+  }
+  
+  
 }
 
 function onWindowResize() {
@@ -269,11 +303,11 @@ function onWindowResize() {
 }
 
 //POINTERLOCK
-// function onDocumentMouseMove( event ) {
-//   event.preventDefault();
-//   mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-//   mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-// }
+function onDocumentMouseMove( event ) {
+  event.preventDefault();
+  mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+  mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+}
 
 
 function animate() {
@@ -294,32 +328,51 @@ function animate() {
 			if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
 			INTERSECTED = null;
 		}
-    //
-    // let time = performance.now();
-    // let delta = ( time - prevTime ) / 1000;
-    //
-    // velocity.x -= velocity.x * 5.8 * delta;
-    // velocity.z -= velocity.z * 5.8 * delta;
-    // velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
-    //
-    // direction.z = Number( moveForward ) - Number( moveBackward );
-    // direction.x = Number( moveLeft ) - Number( moveRight );
-    // direction.normalize(); // this ensures consistent movements in all directions
-    //
-    // if ( moveForward || moveBackward ) velocity.z -= direction.z * 400.0 * delta;
-    // if ( moveLeft || moveRight ) velocity.x -= direction.x * 400.0 * delta;
-    //
-    // controls.getObject().translateX( velocity.x * delta );
-    // controls.getObject().position.y += ( velocity.y * delta ); // new behavior
-    // controls.getObject().translateZ( velocity.z * delta );
-    // if ( controls.getObject().position.y < 50 ) {
-    //   velocity.y = 0;
-    //   controls.getObject().position.y = 50;
-    //   canJump = true;
-    // }
-    // prevTime = time;
+    //pointerlock controls
+    let time = performance.now();
+    let delta = ( time - prevTime ) / 1000;
+    
+    velocity.x -= velocity.x * 5.8 * delta;
+    velocity.z -= velocity.z * 5.8 * delta;
+    velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
+    
+    direction.z = Number( moveForward ) - Number( moveBackward );
+    direction.x = Number( moveLeft ) - Number( moveRight );
+    direction.normalize(); // this ensures consistent movements in all directions
+    
+    if ( moveForward || moveBackward ) velocity.z -= direction.z * 400.0 * delta;
+    if ( moveLeft || moveRight ) velocity.x -= direction.x * 400.0 * delta;
+    
+    controls.getObject().translateX( velocity.x * delta );
+    controls.getObject().position.y += ( velocity.y * delta ); // new behavior
+    controls.getObject().translateZ( velocity.z * delta );
+    if ( controls.getObject().position.y < 50 ) {
+      velocity.y = 0;
+      controls.getObject().position.y = 50;
+      canJump = true;
+    }
+    prevTime = time;
   }
+
+  //rain
   particleSystem.rotation.y += 0.0015;
   simulateRain();
+  //
+
+  //magic particles
+  var time = Date.now() * 0.00005;
+				for ( var i = 0; i < scene.children.length; i ++ ) {
+					var object = scene.children[ i ];
+					if ( object instanceof THREE.Points ) {
+						object.rotation.y = time * ( i < 4 ? i + 1 : - ( i + 1 ) );
+					}
+				}
+				for ( var i = 0; i < materials.length; i ++ ) {
+					var color = parameters[ i ][ 0 ];
+					var h = ( 360 * ( color[ 0 ] + time ) % 360 ) / 360;
+					materials[ i ].color.setHSL( h, color[ 1 ], color[ 2 ] );
+        }
+  
+
   renderer.render( scene, camera );
 }
