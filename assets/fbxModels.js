@@ -329,7 +329,7 @@
   for(let i = 0; i < 10; i ++) {
     loader.load(rocksFile, (rock) => {
       rock.position.x = Math.floor( Math.random() * 20 - 10 ) * 8 + 880;
-      rock.position.y = -1;
+      rock.position.y = -2;
       rock.position.z = Math.floor( Math.random() * 20 - 10 ) * 50 + 50;
       rock.rotation.y = Math.floor(Math.random() * 5);
       rock.scale.set(0.4,0.4,0.4);
@@ -456,14 +456,3 @@
       scene.add(rock);
     });
   }
-
-  // path way rocks around world
-  // for ( let i = 0; i < 120; i ++ ) {
-  //   loader.load( 'models/fbxObjects/rock3.fbx', (rock) => {
-  //     rock.position.x = Math.floor( Math.random() * 20 - 10 ) * 100 + 200;
-  //     rock.position.y = 0;
-  //     rock.position.z = Math.floor( Math.random() * 20 - 10 ) * 0.2 - 960;
-  //     rock.scale.set(0.6,0.6,0.6);
-  //     scene.add(rock);
-  //   } );
-  // }
