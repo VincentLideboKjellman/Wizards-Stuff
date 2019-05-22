@@ -2,7 +2,7 @@ var ravenListener = new THREE.AudioListener();
 camera.add( ravenListener );
 
 var sphere = new THREE.SphereBufferGeometry( 20, 32, 16 );
-material1 = new THREE.MeshPhongMaterial( { color: 0xffaa00, flatShading: true, shininess: 0 } );
+material1 = new THREE.MeshPhongMaterial( { color: 0xffaa00, flatShading: true, shininess: 0} );
 
 // sound spheres
 var audioLoader = new THREE.AudioLoader();

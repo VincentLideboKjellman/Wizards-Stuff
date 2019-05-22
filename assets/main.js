@@ -23,13 +23,10 @@ let color = new THREE.Color();
 let mouse = new THREE.Vector2(), INTERSECTED;
 
 // RAIN VARIABLES
-var particleSystem, particleCount, particles;
+var particleSystem, rainParticleCount, rainParticles;
 
 //For animations etc ( almost like Date but better apparently)
 let clock = new THREE.Clock();
-
-//magic particles
-var materials = [], parameters;
 
 init();
 animate();
@@ -59,7 +56,7 @@ function init() {
 
   scene = new THREE.Scene();
   scene.background = new THREE.Color( 0x000000 );
-  scene.fog = new THREE.Fog( 0x000000, 0, 700 );
+  // scene.fog = new THREE.Fog( 0x000000, 0, 700 );
   let light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 0.75 );
   light.position.set( 0.5, 1, 0.75 );
   scene.add( light );
@@ -165,42 +162,15 @@ function init() {
   scene.add( floor );
 
 
-  // let boxGeometry = new THREE.BoxBufferGeometry( 20, 20, 20 );
-  // boxGeometry = boxGeometry.toNonIndexed();
-  //
-  // position = boxGeometry.attributes.position;
-  // let colors = [];
-  //
-  // for ( let i = 0, l = position.count; i < l; i ++ ) {
-  //   color.setHSL( Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
-  //   colors.push( color.r, color.g, color.b );
-  // }
-  //
-  // boxGeometry.addAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
-  //
-  // for ( let i = 0; i < 1; i ++ ) {
-  //   let boxMaterial = new THREE.MeshPhongMaterial( { specular: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
-  //   boxMaterial.color.setHSL( Math.random() * 0.2 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
-  //   let box = new THREE.Mesh( boxGeometry, boxMaterial );
-  //   box.position.x = Math.floor( Math.random() * 20 - 10 ) * 20;
-  //   box.position.y = Math.floor( Math.random() * 20 ) * 20 + 10;
-  //   box.position.z = Math.floor( Math.random() * 20 - 10 ) * 20;
-  //   scene.add( box );
-  //   objects.push( box );
-  // }
 
   //---/////////////////////////////////////////////RAIN CODE
-  //---/////////////////////////////////////////////
-  ///////////////////
-    // OBJECTS  //
-    ///////////////////
     var loader = new THREE.TextureLoader();
     loader.crossOrigin = '';
 
     // ///////////////////
     // // RAIN  //
     // ///////////////////
-    particleCount = 14000;
+    rainParticleCount = 5000;
     var pMaterial = new THREE.PointCloudMaterial({
       color: 0xFFFFFF,
       size: 3,
@@ -213,87 +183,58 @@ function init() {
        transparent: true
     });
 
-    particles = new THREE.Geometry;
-    for (var i = 0; i < particleCount; i++) {
+    rainParticles = new THREE.Geometry;
+    for (var i = 0; i < rainParticleCount; i++) {
         var pX = Math.random()*500 - 250,
             pY = Math.random()*500 - 250,
             pZ = Math.random()*500 - 250,
             particle = new THREE.Vector3(pX, pY, pZ);
         particle.velocity = {};
         particle.velocity.y = 0;
-        particles.vertices.push(particle);
+        rainParticles.vertices.push(particle);
     }
-    particleSystem = new THREE.PointCloud(particles, pMaterial);
+    particleSystem = new THREE.PointCloud(rainParticles, pMaterial);
     scene.add(particleSystem);
+    //
 
+    ///////////////////////////////////////////////MAGIC CODE
+    var loader = new THREE.TextureLoader();
+    loader.crossOrigin = '';
 
-  //---/////////////////////////////////////////////END CODE
-  //---/////////////////////////////////////////////
-  
-  //---/////////////////////////////////////////////RAIN SIMULATION
-  //---/////////////////////////////////////////////RAIN
+    // Magic
+    var magicParticleCount = 400;
+    var pMaterial = new THREE.PointCloudMaterial({
+      color: 0xFFFFFF,
+      size: 3,
+      map: loader.load(
+        "assets/particleImages/magicParticle.png"
+        // "https://s3-us-west-2.amazonaws.com/s.cdpn.io/212131/raindrop2.png"
+       ),
+       blending: THREE.AdditiveBlending,
+       depthTest: true,
+       transparent: true
+    });
 
-function simulateRain() {
-  var pCount = particleCount;
-  while (pCount--) {
-  var particle = particles.vertices[pCount];
-  if (particle.y < -200) {
-    particle.y = 200;
-    particle.velocity.y = 0;
-  }
-  particle.velocity.y -= Math.random() * 2;
-  particle.y += particle.velocity.y;
-  }
-  particles.verticesNeedUpdate = true;
-};
-
-//---/////////////////////////////////////////////RAIN SIMULATION
-  //---/////////////////////////////////////////////RAIN
-
-
-  
+    var magicParticles = new THREE.Geometry;
+    for (var i = 0; i < magicParticleCount; i++) {
+        var pX = Math.random()*500 - 250,
+            pY = Math.random()*500 - 250,
+            pZ = Math.random()*500 - 250,
+            particle = new THREE.Vector3(pX, pY, pZ);
+        particle.velocity = {};
+        particle.velocity.y = 0;
+        magicParticles.vertices.push(particle);
+    }
+    particleSystem = new THREE.PointCloud(magicParticles, pMaterial);
+    scene.add(particleSystem);
+    //
 
   renderer = new THREE.WebGLRenderer( { antialias: true } );
   renderer.setPixelRatio( window.devicePixelRatio );
   renderer.setSize( window.innerWidth, window.innerHeight );
   document.body.appendChild( renderer.domElement );
   window.addEventListener( 'resize', onWindowResize, false );
-
-
-  //ORBITCONTROL
-  // controls = new THREE.OrbitControls(camera, document, renderer.domElement);
-
-
-  //MAGIC PARTICLES
-  var magicParticleGeometry = new THREE.BufferGeometry();
-  var vertices = [];
-  var magicParticleTextureLoader = new THREE.TextureLoader();
-  var sprite1 = magicParticleTextureLoader.load( 'assets/particleImages/magicParticle.png' );
-
-  for ( var i = 0; i < 2000; i ++ ) {
-    var x = Math.random() * 2000 - 1000;
-    var y = Math.random() * 2000 - 1000;
-    var z = Math.random() * 2000 - 1000;
-    vertices.push( x, y, z );
-  }
-  magicParticleGeometry.addAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
-  parameters = [
-    [[ 0.90, 0.05, 0.5 ], sprite1, 10 ]
-  ];
-  for ( var i = 0; i < parameters.length; i ++ ) {
-    var color = parameters[ i ][ 0 ];
-    var sprite = parameters[ i ][ 1 ];
-    var size = parameters[ i ][ 2 ];
-    materials[ i ] = new THREE.PointsMaterial( { size: size, map: sprite, blending: THREE.AdditiveBlending, depthTest: true, transparent: true } );
-    materials[ i ].color.setHSL( color[ 0 ], color[ 1 ], color[ 2 ] );
-    var magicParticles = new THREE.Points( magicParticleGeometry, materials[ i ] );
-    magicParticles.rotation.x = Math.random() * 0.5;
-    magicParticles.rotation.y = Math.random() * 0.3;
-    magicParticles.rotation.z = Math.random() * 0.4;
-    scene.add( magicParticles );
-  }
-  
-  
+    
 }
 
 function onWindowResize() {
@@ -355,24 +296,26 @@ function animate() {
   }
 
   //rain
-  particleSystem.rotation.y += 0.0015;
+  function simulateRain() {
+    var pCount = rainParticleCount;
+    while (pCount--) {
+    var rainParticle = rainParticles.vertices[pCount];
+    if (rainParticle.y < -20) {
+      rainParticle.y = 100;
+      rainParticle.velocity.y = 0;
+    }
+    rainParticle.velocity.y -= Math.random() * 1.3;
+    rainParticle.y += rainParticle.velocity.y;
+    }
+    rainParticles.verticesNeedUpdate = true;
+  };
+  //rain
+  // particleSystem.rotation.y += 0.0015;
   simulateRain();
   //
 
-  //magic particles
-  var time = Date.now() * 0.00005;
-				for ( var i = 0; i < scene.children.length; i ++ ) {
-					var object = scene.children[ i ];
-					if ( object instanceof THREE.Points ) {
-						object.rotation.y = time * ( i < 4 ? i + 1 : - ( i + 1 ) );
-					}
-				}
-				for ( var i = 0; i < materials.length; i ++ ) {
-					var color = parameters[ i ][ 0 ];
-					var h = ( 360 * ( color[ 0 ] + time ) % 360 ) / 360;
-					materials[ i ].color.setHSL( h, color[ 1 ], color[ 2 ] );
-        }
-  
+  //simulate magic
 
   renderer.render( scene, camera );
+
 }
