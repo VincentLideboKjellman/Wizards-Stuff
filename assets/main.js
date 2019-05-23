@@ -18,7 +18,7 @@ let color = new THREE.Color();
 let mouse = new THREE.Vector2(), INTERSECTED;
 let winGame = false;
 
-// RAIN VARIABLES
+// RAIN VARIABLESk
 let particleSystem, rainParticleCount, rainParticles, pMaterial;
 let magicParticleCount, magicParticles;
 
