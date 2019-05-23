@@ -18,18 +18,13 @@ let color = new THREE.Color();
 let mouse = new THREE.Vector2(), INTERSECTED;
 let winGame = false;
 
-// RAIN VARIABLES KOD
+// RAIN VARIABLES
 let particleSystem, rainParticleCount, rainParticles, pMaterial;
 let magicParticleCount, magicParticles;
 
 //For animations etc ( almost like Date but better apparently)
 let clock = new THREE.Clock();
-//test
 
-
-
-
-// ny kod
 init();
 animate();
 
