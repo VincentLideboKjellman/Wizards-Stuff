@@ -22,7 +22,6 @@ let winGame = false;
 let particleSystem, rainParticleCount, rainParticles, pMaterial;
 let magicParticleCount, magicParticles;
 
-//test comment
 //For animations etc ( almost like Date but better apparently)
 let clock = new THREE.Clock();
 
