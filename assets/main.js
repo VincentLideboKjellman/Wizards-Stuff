@@ -25,6 +25,7 @@ let magicParticleCount, magicParticles;
 //For animations etc ( almost like Date but better apparently)
 let clock = new THREE.Clock();
 
+//new test
 init();
 animate();
 
