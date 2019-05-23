@@ -242,7 +242,7 @@
   // TREES
   //4-trees model outside of garden
   let fourTreesFile = 'models/fbxObjects/ScaryTrees.fbx';
-  for(let i = 0; i < 18; i ++) {
+  for(let i = 0; i < 15; i ++) {
     loader.load(fourTreesFile, (tree) => {
       tree.position.x = Math.floor( Math.random() * 20 - 10 ) * 70 + 120;
       tree.position.y = -1;
@@ -338,10 +338,10 @@
   }
 
   // rocks around tower right side
-  for(let i = 0; i < 5; i ++) {
+  for(let i = 0; i < 3; i ++) {
     loader.load(rocksFile, (rock) => {
       rock.position.x = Math.floor( Math.random() * 20 - 10 ) * 5 + 160;
-      rock.position.y = -1;
+      rock.position.y = -2;
       rock.position.z = Math.floor( Math.random() * 20 - 10 ) * 10 + 650;
       rock.rotation.y = Math.floor(Math.random() * 5);
       rock.scale.set(0.4,0.4,0.4);
@@ -350,10 +350,10 @@
   }
 
   // rocks around tower outside left
-  for(let i = 0; i < 8; i ++ ){
+  for(let i = 0; i < 5; i ++ ){
     loader.load(rocksFile, (rock) => {
       rock.position.x = Math.floor( Math.random() * 20 - 10 ) * 5 + 210;
-      rock.position.y = -1;
+      rock.position.y = -2;
       rock.position.z = Math.floor( Math.random() * 20 - 10 ) * 20 -550;
       rock.rotation.y = Math.floor(Math.random() * 5);
       rock.scale.set(0.3,0.3,0.3);
@@ -365,17 +365,17 @@
   for(let i = 0; i < 3; i ++) {
     loader.load(rocksFile, (rock) => {
       rock.position.x = Math.floor( Math.random() * 20 - 10 ) * 5 -400;
-      rock.position.y = -1;
+      rock.position.y = -2;
       rock.position.z = Math.floor( Math.random() * 20 - 10 ) * 15 -450;
       rock.scale.set(1.5,1.5,1.5);
       scene.add(rock);
     });
   }
 
-  for(let i = 0; i < 12; i ++) {
+  for(let i = 0; i < 7; i ++) {
     loader.load(rocksFile, (rock) => {
       rock.position.x = Math.floor( Math.random() * 20 - 10 ) * 10 -350;
-      rock.position.y = -1;
+      rock.position.y = -2;
       rock.position.z = Math.floor( Math.random() * 20 - 10 ) * 40 +250;
       rock.scale.set(0.7,0.7,0.7);
       scene.add(rock);
@@ -385,7 +385,7 @@
   for(let i = 0; i < 5; i ++) {
     loader.load(rocksFile, (rock) => {
       rock.position.x = Math.floor( Math.random() * 20 - 10 ) * 5 -660;
-      rock.position.y = -1;
+      rock.position.y = -2;
       rock.position.z = Math.floor( Math.random() * 20 - 10 ) * 5 + 150;
       rock.scale.set(0.4,0.4,0.4);
       scene.add(rock);
@@ -393,7 +393,7 @@
   }
 
   loader.load(rocksFile, (rock) => {
-    rock.position.set(-550, -1, -400)
+    rock.position.set(-550, -2, -400)
     rock.scale.set(4,4,4);
     scene.add(rock);
   });
@@ -405,52 +405,52 @@
   });
 
   loader.load(rocksFile, (rock) => {
-    rock.position.set(-480, -1, -350)
+    rock.position.set(-480, -2, -350)
     rock.scale.set(2.7,2.7,2.7);
     scene.add(rock);
   });
 
   loader.load(rocksFile, (rock) => {
-    rock.position.set(-480, -1, -180)
+    rock.position.set(-480, -2, -180)
     rock.scale.set(2.6,2.6,2.6);
     scene.add(rock);
   });
 
   loader.load(rocksFile, (rock) => {
-    rock.position.set(-550, -1, -20)
+    rock.position.set(-550, -2, -20)
     rock.scale.set(2.6,2.6,2.6);
     scene.add(rock);
   });
 
   loader.load(rocksFile, (rock) => {
-    rock.position.set(-790, -1, -400)
+    rock.position.set(-790, -2, -400)
     rock.scale.set(2,2,2);
     scene.add(rock);
   });
 
   loader.load(rocksFile, (rock) => {
-    rock.position.set(-790, -1, -300)
+    rock.position.set(-790, -2, -300)
     rock.scale.set(2,2,2);
     scene.add(rock);
   });
 
   loader.load(rocksFile, (rock) => {
-    rock.position.set(-600, -1, 1160)
+    rock.position.set(-600, -2, 1160)
     rock.scale.set(2.7,2.7,2.7);
     scene.add(rock);
   });
 
   loader.load(rocksFile, (rock) => {
-    rock.position.set(-500, -1, 1070)
+    rock.position.set(-500, -2, 1070)
     rock.scale.set(1.8,1.8,1.8);
     scene.add(rock);
   });
 
   // rocks corner of forest
-  for(let i = 0; i < 8; i ++) {
+  for(let i = 0; i < 5; i ++) {
     loader.load(rocksFile, (rock) => {
       rock.position.x = Math.floor( Math.random() * 20 - 10 ) * 5 -860;
-      rock.position.y = -1;
+      rock.position.y = -2;
       rock.position.z = Math.floor( Math.random() * 20 - 10 ) * 40 + 650;
       rock.scale.set(1.2,1.2,1.2);
       scene.add(rock);
