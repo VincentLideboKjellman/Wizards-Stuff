@@ -22,18 +22,15 @@ let winGame = false;
 let particleSystem, rainParticleCount, rainParticles, pMaterial;
 let magicParticleCount, magicParticles;
 
-//For animations etc ( almost like Date but better apparently)
-let clock = new THREE.Clock();
-
-//BATS
+//BAT VARIABLES
 let bats = [];
-//for animation
+//for bar animation
 //orbital radius
-var batRadius = 350;
+var batRadius = 350; // How big a circle the bat will fly
 // start angle
 var batTheta = 0;
 //angle increment value
-var batDTheta = 2 * Math.PI / 1000;
+var batDTheta = 2 * Math.PI / 1000; //Here change the last number to change the bats speed
 
 init();
 animate();
@@ -54,7 +51,7 @@ function init() {
     bat.position.y = Math.floor( Math.random() * 40 + 100);
     bat.position.z = 66;
     bat.rotation.x = Math.PI / 2;
-    bat.rotation.z = 0; // start
+    bat.rotation.z = 0; // starting position so it matches how it starts to fly
     bat.scale.set(50,50,50)
     bats.push(bat);
   });
@@ -390,19 +387,6 @@ function animate() {
 
       bats[0].rotation.z += batDTheta;
 
-
-// var batRadius = 350;
-// // start angle
-// var batTheta = 0;
-// //angle increment value
-// var batDTheta = 2 * Math.PI / 1000;
-      // var batTime = Date.now() * 0.0005;
-      // bats[0].position.x = Math.sin(1 * 0.3) * 30;
-      // bats[0].position.z = Math.cos(1 * 0.4) * 30;
-
-      // bats[0].position.x -= 1.5
-      // bats[0].position.z += 1
-      // bats[0].rotatation.x += 1
       bats[0].verticesNeedUpdate = true;
     }
     animateBat();
