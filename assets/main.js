@@ -390,12 +390,6 @@ function animate() {
 
       bats[0].rotation.z += batDTheta;
 
-
-// var batRadius = 350;
-// // start angle
-// var batTheta = 0;
-// //angle increment value
-// var batDTheta = 2 * Math.PI / 1000;
       // var batTime = Date.now() * 0.0005;
       // bats[0].position.x = Math.sin(1 * 0.3) * 30;
       // bats[0].position.z = Math.cos(1 * 0.4) * 30;
