@@ -157,22 +157,23 @@ new THREE.OBJLoader()
 
 
 // Bat
-for(let i = 0; i < 5; i ++) {
-  new THREE.OBJLoader()
-  .load('models/obj/bat.obj', (object) => {
-    let texture = new THREE.TextureLoader().load('models/obj/assets_texture.jpg');
-    object.traverse((child) => {
-      if (child instanceof THREE.Mesh) {
-        child.material.map = texture;
-      }});
-    scene.add(object);
-    object.position.x = 680;
-    object.position.y = Math.floor( Math.random() * 40 + 100);
-    object.position.z = 66;
-    object.rotation.x = Math.PI / 2;
-    object.scale.set(50,50,50)
-  });
-}
+// for(let i = 0; i < 1; i ++) {
+//   new THREE.OBJLoader()
+//   .load('models/obj/bat.obj', (bat) => {
+//     let texture = new THREE.TextureLoader().load('models/obj/assets_texture.jpg');
+//     bat.traverse((child) => {
+//       if (child instanceof THREE.Mesh) {
+//         child.material.map = texture;
+//       }});
+//     scene.add(bat);
+//     bat.position.x = 680;
+//     bat.position.y = Math.floor( Math.random() * 40 + 100);
+//     bat.position.z = 66;
+//     bat.rotation.x = Math.PI / 2;
+//     bat.scale.set(50,50,50)
+//     // bats.push(bat);
+//   });
+// // }
 
 
 // White trees

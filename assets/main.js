@@ -18,13 +18,22 @@ let color = new THREE.Color();
 let mouse = new THREE.Vector2(), INTERSECTED;
 let winGame = false;
 
-
 // RAIN VARIABLES
 let particleSystem, rainParticleCount, rainParticles, pMaterial;
 let magicParticleCount, magicParticles;
 
 //For animations etc ( almost like Date but better apparently)
 let clock = new THREE.Clock();
+
+//BATS
+let bats = [];
+//for animation
+//orbital radius
+var batRadius = 350;
+// start angle
+var batTheta = 0;
+//angle increment value
+var batDTheta = 2 * Math.PI / 1000;
 
 init();
 animate();
@@ -33,7 +42,22 @@ function init() {
   camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
   camera.position.y = 50;
 
-
+  new THREE.OBJLoader()
+  .load('models/obj/bat.obj', (bat) => {
+    let texture = new THREE.TextureLoader().load('models/obj/assets_texture.jpg');
+    bat.traverse((child) => {
+      if (child instanceof THREE.Mesh) {
+        child.material.map = texture;
+      }});
+    scene.add(bat);
+    bat.position.x = 680;
+    bat.position.y = Math.floor( Math.random() * 40 + 100);
+    bat.position.z = 66;
+    bat.rotation.x = Math.PI / 2;
+    bat.rotation.z = 0; // start
+    bat.scale.set(50,50,50)
+    bats.push(bat);
+  });
 
   //SOUNDS
   // create an AudioListener and add it to the camera
@@ -325,8 +349,8 @@ function animate() {
     direction.x = Number( moveLeft ) - Number( moveRight );
     direction.normalize();
 
-    if ( moveForward || moveBackward ) velocity.z -= direction.z * 400.0 * delta;
-    if ( moveLeft || moveRight ) velocity.x -= direction.x * 400.0 * delta;
+    if ( moveForward || moveBackward ) velocity.z -= direction.z * 400.0 * delta; //changed from 400
+    if ( moveLeft || moveRight ) velocity.x -= direction.x * 400.0 * delta; //changed from 400
 
     controls.getObject().translateX( velocity.x * delta );
     controls.getObject().position.y += ( velocity.y * delta ); // new behavior
@@ -353,6 +377,39 @@ function animate() {
     if(camera.position.x < -910) {
       camera.position.x = -910;
     }
+
+
+    // BAT ANIMATION
+    // console.log(bats);
+    // console.log(bats[0].position.x += 0.1) 
+    function animateBat(){
+
+      batTheta += batDTheta;
+      bats[0].position.x = batRadius * Math.cos(batTheta);
+      bats[0].position.z = batRadius * Math.sin(batTheta);
+
+      bats[0].rotation.z += batDTheta;
+
+
+// var batRadius = 350;
+// // start angle
+// var batTheta = 0;
+// //angle increment value
+// var batDTheta = 2 * Math.PI / 1000;
+      // var batTime = Date.now() * 0.0005;
+      // bats[0].position.x = Math.sin(1 * 0.3) * 30;
+      // bats[0].position.z = Math.cos(1 * 0.4) * 30;
+
+      // bats[0].position.x -= 1.5
+      // bats[0].position.z += 1
+      // bats[0].rotatation.x += 1
+      bats[0].verticesNeedUpdate = true;
+    }
+    animateBat();
+    console.log(bats[0]);
+    
+  
+    
 
 
     //RAIN ANIMATION
