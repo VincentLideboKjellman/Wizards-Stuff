@@ -30,7 +30,7 @@ var batRadius = 350; // How big a circle the bat will fly
 // start angle
 var batTheta = 0;
 //angle increment value
-var batDTheta = 2 * Math.PI / 1000; //Here change the last number to change the bats speed
+var batDTheta = 2 * Math.PI / 350; //Here change the last number to change the bats speed
 
 init();
 animate();
@@ -39,6 +39,7 @@ function init() {
   camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
   camera.position.y = 50;
 
+  //BAT OBJECT
   new THREE.OBJLoader()
   .load('models/obj/bat.obj', (bat) => {
     let texture = new THREE.TextureLoader().load('models/obj/assets_texture.jpg');
@@ -48,7 +49,8 @@ function init() {
       }});
     scene.add(bat);
     bat.position.x = 680;
-    bat.position.y = Math.floor( Math.random() * 40 + 100);
+    // bat.position.y = Math.floor( Math.random() * 40 + 100);
+    bat.position.y = 200;
     bat.position.z = 66;
     bat.rotation.x = Math.PI / 2;
     bat.rotation.z = 0; // starting position so it matches how it starts to fly
@@ -71,6 +73,17 @@ function init() {
   sound.setLoop( true );
   sound.setVolume( 0.3 );
   sound.play();
+  });
+
+  //music
+  let music = new THREE.Audio( listener );
+
+  let musicLoader = new THREE.AudioLoader();
+  musicLoader.load( 'assets/sounds/music.mp3', function( buffer ) {
+  music.setBuffer( buffer );
+  music.setLoop( true );
+  music.setVolume( 0.1 );
+  music.play();
   });
 
 
@@ -377,8 +390,6 @@ function animate() {
 
 
     // BAT ANIMATION
-    // console.log(bats);
-    // console.log(bats[0].position.x += 0.1) 
     function animateBat(){
 
       batTheta += batDTheta;
