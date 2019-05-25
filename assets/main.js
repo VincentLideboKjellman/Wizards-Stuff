@@ -37,21 +37,21 @@ let bigStones = [];
 
 //small stone 1
 let smallStones = [];
-var smallStoneRadius = 50;
-var smallStoneTheta = 0;
-var smallStoneDTheta = 2 * Math.PI / 600;
+var smallStoneRadius = 40;
+var smallStoneTheta = 90;
+var smallStoneDTheta = 2 * Math.PI / 800;
 
 //small stone 2
 let smallStones2 = [];
-var smallStone2Radius = 60;
-var smallStone2Theta = 0;
-var smallStone2DTheta = 2 * Math.PI / 500;
+var smallStone2Radius = 40;
+var smallStone2Theta = 180;
+var smallStone2DTheta = 2 * Math.PI / 800;
 
 //small stone 3
 let smallStones3 = [];
 var smallStone3Radius = 40;
 var smallStone3Theta = 0;
-var smallStone3DTheta = 2 * Math.PI / 400;
+var smallStone3DTheta = 2 * Math.PI / 800;
 
 
 init();
@@ -501,24 +501,30 @@ function animate() {
     function animateSmallStone(){
       //big stone
       bigStones[0].rotation.z += 0.03;
+      // 540, 30, -250  // big stone, or middle
 
       //small stone 1
       smallStoneTheta += smallStoneDTheta;
       smallStones[0].position.x = 540 + smallStoneRadius * Math.cos(smallStoneTheta);
       smallStones[0].position.z = -250 + smallStoneRadius * Math.sin(smallStoneTheta);
       smallStones[0].rotation.z += smallStoneDTheta;
+      // 590, 50, -250
+
+     
 
       //small stone 2
       smallStone2Theta += smallStone2DTheta;
       smallStones2[0].position.x = 540 + smallStone2Radius * Math.cos(smallStone2Theta);
       smallStones2[0].position.z = -250 + smallStone2Radius * Math.sin(smallStone2Theta);
       smallStones2[0].rotation.z += smallStone2DTheta;
+      // 510, 50, -300
 
       //small stone 3
       smallStone3Theta += smallStone3DTheta;
       smallStones3[0].position.x = 540 + smallStone3Radius * Math.cos(smallStone3Theta);
       smallStones3[0].position.z = -250 + smallStone3Radius * Math.sin(smallStone3Theta);
       smallStones3[0].rotation.z += smallStone3DTheta;
+      // 510, 50, -200
 
 
       smallStones[0].verticesNeedUpdate = true;
