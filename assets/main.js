@@ -30,7 +30,29 @@ var batRadius = 350; // How big a circle the bat will fly
 // start angle
 var batTheta = 0;
 //angle increment value
-var batDTheta = 2 * Math.PI / 1000; //Here change the last number to change the bats speed
+var batDTheta = 2 * Math.PI / 350; //Here change the last number to change the bats speed
+
+//STONES VARIABLES
+let bigStones = [];
+
+//small stone 1
+let smallStones = [];
+var smallStoneRadius = 40;
+var smallStoneTheta = 90;
+var smallStoneDTheta = 2 * Math.PI / 800;
+
+//small stone 2
+let smallStones2 = [];
+var smallStone2Radius = 40;
+var smallStone2Theta = 180;
+var smallStone2DTheta = 2 * Math.PI / 800;
+
+//small stone 3
+let smallStones3 = [];
+var smallStone3Radius = 40;
+var smallStone3Theta = 0;
+var smallStone3DTheta = 2 * Math.PI / 800;
+
 
 init();
 animate();
@@ -39,6 +61,9 @@ function init() {
   camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
   camera.position.y = 50;
 
+  //OBJECTS
+
+  //BAT OBJECT
   new THREE.OBJLoader()
   .load('models/obj/bat.obj', (bat) => {
     let texture = new THREE.TextureLoader().load('models/obj/assets_texture.jpg');
@@ -48,13 +73,85 @@ function init() {
       }});
     scene.add(bat);
     bat.position.x = 680;
-    bat.position.y = Math.floor( Math.random() * 40 + 100);
+    // bat.position.y = Math.floor( Math.random() * 40 + 100);
+    bat.position.y = 200;
     bat.position.z = 66;
     bat.rotation.x = Math.PI / 2;
     bat.rotation.z = 0; // starting position so it matches how it starts to fly
     bat.scale.set(50,50,50)
     bats.push(bat);
   });
+
+  //STONE OBJECT
+  // gemstones garden
+  // OBJFile = 'models/obj/gem.obj.obj';
+  //big stone
+  let gemstoneFile = 'models/obj/purplegemstone.png';
+  new THREE.OBJLoader()
+  .load('models/obj/gem.obj.obj', (bigStone) => {
+    let texture = new THREE.TextureLoader().load(gemstoneFile);
+    bigStone.traverse((child) => {
+      if (child instanceof THREE.Mesh) {
+        child.material.map = texture;
+      }});
+    scene.add(bigStone);
+    bigStone.position.set(540, 50, -250)
+    bigStone.rotation.x = -Math.PI / 2;
+    bigStone.rotation.z = -Math.PI / 2;
+    bigStone.scale.set(0.8,0.8,0.8)
+    bigStones.push(bigStone)
+
+    let bigStoneLight = new THREE.PointLight( 0x8539F8, 3, 300);
+    bigStoneLight.position.set( 540, 30, -250 );
+    scene.add( bigStoneLight );
+  });
+  //small stone 1
+  new THREE.OBJLoader()
+  .load('models/obj/gem.obj.obj', (smallStone) => {
+    let texture = new THREE.TextureLoader().load(gemstoneFile);
+    smallStone.traverse((child) => {
+      if (child instanceof THREE.Mesh) {
+        child.material.map = texture;
+      }});
+    scene.add(smallStone);
+    smallStone.position.set(590, 50, -250);
+    smallStone.rotation.x = -Math.PI / 2;
+    smallStone.rotation.z = -Math.PI / 2;
+    smallStone.scale.set(0.5,0.5,0.5)
+    smallStones.push(smallStone);
+  });
+  //small stone 2
+  new THREE.OBJLoader()
+  .load('models/obj/gem.obj.obj', (smallStone2) => {
+    let texture = new THREE.TextureLoader().load(gemstoneFile);
+    smallStone2.traverse((child) => {
+      if (child instanceof THREE.Mesh) {
+        child.material.map = texture;
+      }});
+    scene.add(smallStone2);
+    smallStone2.position.set(510, 50, -300)
+    smallStone2.rotation.x = -Math.PI / 2;
+    smallStone2.rotation.z = -Math.PI / 2;
+    smallStone2.scale.set(0.5,0.5,0.5)
+    smallStones2.push(smallStone2);
+  });
+  //small stone 3
+  new THREE.OBJLoader()
+  .load('models/obj/gem.obj.obj', (smallStone3) => {
+    let texture = new THREE.TextureLoader().load(gemstoneFile);
+    smallStone3.traverse((child) => {
+      if (child instanceof THREE.Mesh) {
+        child.material.map = texture;
+      }});
+    scene.add(smallStone3);
+    smallStone3.position.set(510, 50, -200)
+    smallStone3.rotation.x = -Math.PI / 2;
+    smallStone3.rotation.z = -Math.PI / 2;
+    smallStone3.scale.set(0.5,0.5,0.5)
+    smallStones3.push(smallStone3);
+  });
+
+  //
 
   //SOUNDS
   // create an AudioListener and add it to the camera
@@ -71,6 +168,17 @@ function init() {
   sound.setLoop( true );
   sound.setVolume( 0.3 );
   sound.play();
+  });
+
+  //music
+  let music = new THREE.Audio( listener );
+
+  let musicLoader = new THREE.AudioLoader();
+  musicLoader.load( 'assets/sounds/music.mp3', function( buffer ) {
+  music.setBuffer( buffer );
+  music.setLoop( true );
+  music.setVolume( 0.1 );
+  music.play();
   });
 
 
@@ -377,8 +485,6 @@ function animate() {
 
 
     // BAT ANIMATION
-    // console.log(bats);
-    // console.log(bats[0].position.x += 0.1) 
     function animateBat(){
 
       batTheta += batDTheta;
@@ -390,8 +496,45 @@ function animate() {
       bats[0].verticesNeedUpdate = true;
     }
     animateBat();
-    console.log(bats[0]);
-    
+
+    //SMALL STONE ANIMATION
+    function animateSmallStone(){
+      //big stone
+      bigStones[0].rotation.z += 0.03;
+      // 540, 30, -250  // big stone, or middle
+
+      //small stone 1
+      smallStoneTheta += smallStoneDTheta;
+      smallStones[0].position.x = 540 + smallStoneRadius * Math.cos(smallStoneTheta);
+      smallStones[0].position.z = -250 + smallStoneRadius * Math.sin(smallStoneTheta);
+      smallStones[0].rotation.z += smallStoneDTheta;
+      // 590, 50, -250
+
+     
+
+      //small stone 2
+      smallStone2Theta += smallStone2DTheta;
+      smallStones2[0].position.x = 540 + smallStone2Radius * Math.cos(smallStone2Theta);
+      smallStones2[0].position.z = -250 + smallStone2Radius * Math.sin(smallStone2Theta);
+      smallStones2[0].rotation.z += smallStone2DTheta;
+      // 510, 50, -300
+
+      //small stone 3
+      smallStone3Theta += smallStone3DTheta;
+      smallStones3[0].position.x = 540 + smallStone3Radius * Math.cos(smallStone3Theta);
+      smallStones3[0].position.z = -250 + smallStone3Radius * Math.sin(smallStone3Theta);
+      smallStones3[0].rotation.z += smallStone3DTheta;
+      // 510, 50, -200
+
+
+      smallStones[0].verticesNeedUpdate = true;
+      smallStones2[0].verticesNeedUpdate = true;
+      smallStones3[0].verticesNeedUpdate = true;
+      bigStones[0].verticesNeedUpdate = true;
+
+    }
+    console.log(smallStones[0]);
+    animateSmallStone()
   
     
 

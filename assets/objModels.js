@@ -62,67 +62,67 @@ new THREE.OBJLoader()
 });
 
 
-// gemstones garden
-OBJFile = 'models/obj/gem.obj.obj';
-let gemstoneFile = 'models/obj/purplegemstone.png';
-new THREE.OBJLoader()
-.load(OBJFile, (object) => {
-  let texture = new THREE.TextureLoader().load(gemstoneFile);
-  object.traverse((child) => {
-    if (child instanceof THREE.Mesh) {
-      child.material.map = texture;
-    }});
-  scene.add(object);
-  object.position.set(540, 50, -250)
-  object.rotation.x = -Math.PI / 2;
-  object.rotation.z = -Math.PI / 2;
-  object.scale.set(0.8,0.8,0.8)
-  let light = new THREE.PointLight( 0x8539F8, 3, 300);
-  light.position.set( 540, 30, -250 );
-  scene.add( light );
-});
+// // gemstones garden
+// OBJFile = 'models/obj/gem.obj.obj';
+// let gemstoneFile = 'models/obj/purplegemstone.png';
+// new THREE.OBJLoader()
+// .load(OBJFile, (object) => {
+//   let texture = new THREE.TextureLoader().load(gemstoneFile);
+//   object.traverse((child) => {
+//     if (child instanceof THREE.Mesh) {
+//       child.material.map = texture;
+//     }});
+//   scene.add(object);
+//   object.position.set(540, 50, -250)
+//   object.rotation.x = -Math.PI / 2;
+//   object.rotation.z = -Math.PI / 2;
+//   object.scale.set(0.8,0.8,0.8)
+//   let light = new THREE.PointLight( 0x8539F8, 3, 300);
+//   light.position.set( 540, 30, -250 );
+//   scene.add( light );
+// });
 
-new THREE.OBJLoader()
-.load(OBJFile, (object) => {
-  let texture = new THREE.TextureLoader().load(gemstoneFile);
-  object.traverse((child) => {
-    if (child instanceof THREE.Mesh) {
-      child.material.map = texture;
-    }});
-  scene.add(object);
-  object.position.set(590, 50, -250)
-  object.rotation.x = -Math.PI / 2;
-  object.rotation.z = -Math.PI / 2;
-  object.scale.set(0.5,0.5,0.5)
-});
+// new THREE.OBJLoader()
+// .load(OBJFile, (object) => {
+//   let texture = new THREE.TextureLoader().load(gemstoneFile);
+//   object.traverse((child) => {
+//     if (child instanceof THREE.Mesh) {
+//       child.material.map = texture;
+//     }});
+//   scene.add(object);
+//   object.position.set(590, 50, -250)
+//   object.rotation.x = -Math.PI / 2;
+//   object.rotation.z = -Math.PI / 2;
+//   object.scale.set(0.5,0.5,0.5)
+// });
 
-new THREE.OBJLoader()
-.load(OBJFile, (object) => {
-  let texture = new THREE.TextureLoader().load(gemstoneFile);
-  object.traverse((child) => {
-    if (child instanceof THREE.Mesh) {
-      child.material.map = texture;
-    }});
-  scene.add(object);
-  object.position.set(510, 50, -300)
-  object.rotation.x = -Math.PI / 2;
-  object.rotation.z = -Math.PI / 2;
-  object.scale.set(0.5,0.5,0.5)
-});
+// new THREE.OBJLoader()
+// .load(OBJFile, (object) => {
+//   let texture = new THREE.TextureLoader().load(gemstoneFile);
+//   object.traverse((child) => {
+//     if (child instanceof THREE.Mesh) {
+//       child.material.map = texture;
+//     }});
+//   scene.add(object);
+//   object.position.set(510, 50, -300)
+//   object.rotation.x = -Math.PI / 2;
+//   object.rotation.z = -Math.PI / 2;
+//   object.scale.set(0.5,0.5,0.5)
+// });
 
-new THREE.OBJLoader()
-.load(OBJFile, (object) => {
-  let texture = new THREE.TextureLoader().load(gemstoneFile);
-  object.traverse((child) => {
-    if (child instanceof THREE.Mesh) {
-      child.material.map = texture;
-    }});
-  scene.add(object);
-  object.position.set(510, 50, -200)
-  object.rotation.x = -Math.PI / 2;
-  object.rotation.z = -Math.PI / 2;
-  object.scale.set(0.5,0.5,0.5)
-});
+// new THREE.OBJLoader()
+// .load(OBJFile, (object) => {
+//   let texture = new THREE.TextureLoader().load(gemstoneFile);
+//   object.traverse((child) => {
+//     if (child instanceof THREE.Mesh) {
+//       child.material.map = texture;
+//     }});
+//   scene.add(object);
+//   object.position.set(510, 50, -200)
+//   object.rotation.x = -Math.PI / 2;
+//   object.rotation.z = -Math.PI / 2;
+//   object.scale.set(0.5,0.5,0.5)
+// });
 
 
 // book
