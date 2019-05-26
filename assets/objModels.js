@@ -62,69 +62,6 @@ new THREE.OBJLoader()
 });
 
 
-// gemstones garden
-OBJFile = 'models/obj/gem.obj.obj';
-let gemstoneFile = 'models/obj/purplegemstone.png';
-new THREE.OBJLoader()
-.load(OBJFile, (object) => {
-  let texture = new THREE.TextureLoader().load(gemstoneFile);
-  object.traverse((child) => {
-    if (child instanceof THREE.Mesh) {
-      child.material.map = texture;
-    }});
-  scene.add(object);
-  object.position.set(540, 40, -250)
-  object.rotation.x = -Math.PI / 2;
-  object.rotation.z = -Math.PI / 2;
-  object.scale.set(0.8,0.8,0.8)
-  let light = new THREE.PointLight( 0x8539F8, 3, 300);
-  light.position.set( 540, 30, -250 );
-  scene.add( light );
-});
-
-new THREE.OBJLoader()
-.load(OBJFile, (object) => {
-  let texture = new THREE.TextureLoader().load(gemstoneFile);
-  object.traverse((child) => {
-    if (child instanceof THREE.Mesh) {
-      child.material.map = texture;
-    }});
-  scene.add(object);
-  object.position.set(590, 40, -250)
-  object.rotation.x = -Math.PI / 2;
-  object.rotation.z = -Math.PI / 2;
-  object.scale.set(0.5,0.5,0.5)
-});
-
-new THREE.OBJLoader()
-.load(OBJFile, (object) => {
-  let texture = new THREE.TextureLoader().load(gemstoneFile);
-  object.traverse((child) => {
-    if (child instanceof THREE.Mesh) {
-      child.material.map = texture;
-    }});
-  scene.add(object);
-  object.position.set(510, 40, -300)
-  object.rotation.x = -Math.PI / 2;
-  object.rotation.z = -Math.PI / 2;
-  object.scale.set(0.5,0.5,0.5)
-});
-
-new THREE.OBJLoader()
-.load(OBJFile, (object) => {
-  let texture = new THREE.TextureLoader().load(gemstoneFile);
-  object.traverse((child) => {
-    if (child instanceof THREE.Mesh) {
-      child.material.map = texture;
-    }});
-  scene.add(object);
-  object.position.set(510, 40, -200)
-  object.rotation.x = -Math.PI / 2;
-  object.rotation.z = -Math.PI / 2;
-  object.scale.set(0.5,0.5,0.5)
-});
-
-
 // book
 new THREE.OBJLoader()
 .load('models/light/GrimoireTarotCandle.obj', (object) => {
@@ -154,25 +91,6 @@ new THREE.OBJLoader()
   light.position.set( 680, 80, 66 );
   scene.add( light );
 });
-
-
-// Bat
-for(let i = 0; i < 5; i ++) {
-  new THREE.OBJLoader()
-  .load('models/obj/bat.obj', (object) => {
-    let texture = new THREE.TextureLoader().load('models/obj/assets_texture.jpg');
-    object.traverse((child) => {
-      if (child instanceof THREE.Mesh) {
-        child.material.map = texture;
-      }});
-    scene.add(object);
-    object.position.x = 680;
-    object.position.y = Math.floor( Math.random() * 40 + 100);
-    object.position.z = 66;
-    object.rotation.x = Math.PI / 2;
-    object.scale.set(50,50,50)
-  });
-}
 
 
 // White trees
@@ -222,7 +140,7 @@ new THREE.OBJLoader()
   object.scale.set(0.7,0.7,0.7);
 });
 
-//
+
 // Big tower
 OBJFile = 'models/castle/Tower.obj';
 let JPGFile = 'models/castle/Palette3.png';
