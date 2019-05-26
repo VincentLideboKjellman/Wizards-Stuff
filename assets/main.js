@@ -207,6 +207,22 @@ function init() {
 
   startText.addEventListener( 'click', function () {
     controls.lock();
+
+    //count up timer
+    // count up timer
+    let isGameStartedTimer = true;
+
+    if(isGameStartedTimer){
+      var today = new Date();
+      var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      var dateTime = date+' '+time;
+      countUpFromTime(dateTime, 'countup1');
+    }
+      if(winGame){
+        isGameStartedTimer = false;
+      }
+
   }, false );
 
   keepPlaying.addEventListener( 'click', function () {
