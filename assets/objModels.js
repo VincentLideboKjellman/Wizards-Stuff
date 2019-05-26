@@ -14,7 +14,7 @@ new THREE.OBJLoader()
       child.material.map = texture;
     }});
   scene.add(object);
-  object.position.set(0, 33, 650)
+  object.position.set(-60, 33, 650)
   object.scale.set(70,70,70)
 });
 
@@ -62,69 +62,6 @@ new THREE.OBJLoader()
 });
 
 
-// // gemstones garden
-// OBJFile = 'models/obj/gem.obj.obj';
-// let gemstoneFile = 'models/obj/purplegemstone.png';
-// new THREE.OBJLoader()
-// .load(OBJFile, (object) => {
-//   let texture = new THREE.TextureLoader().load(gemstoneFile);
-//   object.traverse((child) => {
-//     if (child instanceof THREE.Mesh) {
-//       child.material.map = texture;
-//     }});
-//   scene.add(object);
-//   object.position.set(540, 50, -250)
-//   object.rotation.x = -Math.PI / 2;
-//   object.rotation.z = -Math.PI / 2;
-//   object.scale.set(0.8,0.8,0.8)
-//   let light = new THREE.PointLight( 0x8539F8, 3, 300);
-//   light.position.set( 540, 30, -250 );
-//   scene.add( light );
-// });
-
-// new THREE.OBJLoader()
-// .load(OBJFile, (object) => {
-//   let texture = new THREE.TextureLoader().load(gemstoneFile);
-//   object.traverse((child) => {
-//     if (child instanceof THREE.Mesh) {
-//       child.material.map = texture;
-//     }});
-//   scene.add(object);
-//   object.position.set(590, 50, -250)
-//   object.rotation.x = -Math.PI / 2;
-//   object.rotation.z = -Math.PI / 2;
-//   object.scale.set(0.5,0.5,0.5)
-// });
-
-// new THREE.OBJLoader()
-// .load(OBJFile, (object) => {
-//   let texture = new THREE.TextureLoader().load(gemstoneFile);
-//   object.traverse((child) => {
-//     if (child instanceof THREE.Mesh) {
-//       child.material.map = texture;
-//     }});
-//   scene.add(object);
-//   object.position.set(510, 50, -300)
-//   object.rotation.x = -Math.PI / 2;
-//   object.rotation.z = -Math.PI / 2;
-//   object.scale.set(0.5,0.5,0.5)
-// });
-
-// new THREE.OBJLoader()
-// .load(OBJFile, (object) => {
-//   let texture = new THREE.TextureLoader().load(gemstoneFile);
-//   object.traverse((child) => {
-//     if (child instanceof THREE.Mesh) {
-//       child.material.map = texture;
-//     }});
-//   scene.add(object);
-//   object.position.set(510, 50, -200)
-//   object.rotation.x = -Math.PI / 2;
-//   object.rotation.z = -Math.PI / 2;
-//   object.scale.set(0.5,0.5,0.5)
-// });
-
-
 // book
 new THREE.OBJLoader()
 .load('models/light/GrimoireTarotCandle.obj', (object) => {
@@ -154,26 +91,6 @@ new THREE.OBJLoader()
   light.position.set( 680, 80, 66 );
   scene.add( light );
 });
-
-
-// Bat
-// for(let i = 0; i < 1; i ++) {
-//   new THREE.OBJLoader()
-//   .load('models/obj/bat.obj', (bat) => {
-//     let texture = new THREE.TextureLoader().load('models/obj/assets_texture.jpg');
-//     bat.traverse((child) => {
-//       if (child instanceof THREE.Mesh) {
-//         child.material.map = texture;
-//       }});
-//     scene.add(bat);
-//     bat.position.x = 680;
-//     bat.position.y = Math.floor( Math.random() * 40 + 100);
-//     bat.position.z = 66;
-//     bat.rotation.x = Math.PI / 2;
-//     bat.scale.set(50,50,50)
-//     // bats.push(bat);
-//   });
-// // }
 
 
 // White trees
@@ -343,7 +260,7 @@ new THREE.OBJLoader()
       child.material.map = texture;
     }});
   scene.add(object);
-  object.position.set(160, -100, 680)
+  object.position.set(60, -100, 680)
   object.rotation.y = -16;
 });
 
@@ -458,7 +375,7 @@ new THREE.OBJLoader()
       child.material.map = texture;
     }});
   scene.add(object);
-  object.position.set(200, -1,590)
+  object.position.set(100, -1,590)
   object.rotation.y = 2.35;
 });
 
@@ -471,7 +388,7 @@ new THREE.OBJLoader()
       child.material.map = texture;
     }});
   scene.add(object);
-  object.position.set(290, -1,502)
+  object.position.set(190, -1,502)
   object.rotation.y = 2.35;
 });
 
@@ -484,7 +401,7 @@ new THREE.OBJLoader()
       child.material.map = texture;
     }});
   scene.add(object);
-  object.position.set(400, -1, 450)
+  object.position.set(300, -1, 450)
   object.rotation.y = 1.7;
 });
 
@@ -510,7 +427,7 @@ new THREE.OBJLoader()
       child.material.map = texture;
     }});
   scene.add(object);
-  object.position.set(100, -1, 765)
+  object.position.set(0, -1, 765)
   object.rotation.y = 2.7;
 });
 

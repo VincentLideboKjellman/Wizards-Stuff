@@ -19,18 +19,23 @@ let mouse = new THREE.Vector2(), INTERSECTED;
 let winGame = false;
 
 // RAIN VARIABLES
-let particleSystem, rainParticleCount, rainParticles, pMaterial;
+let particleSystem, pMaterial
+let rainParticleCount, rainParticles;
 let magicParticleCount, magicParticles;
+let gemstoneParticleCount, gemstoneParticles;
 
 //BAT VARIABLES
 let bats = [];
+
 //for bar animation
 //orbital radius
-var batRadius = 350; // How big a circle the bat will fly
+var batRadius = 350; 
+
 // start angle
 var batTheta = 0;
+
 //angle increment value
-var batDTheta = 2 * Math.PI / 350; //Here change the last number to change the bats speed
+var batDTheta = 2 * Math.PI / 350; 
 
 //STONES VARIABLES
 let bigStones = [];
@@ -61,7 +66,6 @@ function init() {
   camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
   camera.position.y = 50;
 
-  //OBJECTS
 
   //BAT OBJECT
   new THREE.OBJLoader()
@@ -83,8 +87,6 @@ function init() {
   });
 
   //STONE OBJECT
-  // gemstones garden
-  // OBJFile = 'models/obj/gem.obj.obj';
   //big stone
   let gemstoneFile = 'models/obj/purplegemstone.png';
   new THREE.OBJLoader()
@@ -151,7 +153,6 @@ function init() {
     smallStones3.push(smallStone3);
   });
 
-  //
 
   //SOUNDS
   // create an AudioListener and add it to the camera
@@ -160,8 +161,6 @@ function init() {
 
   // create a global audio source
   let sound = new THREE.Audio( listener );
-
-  // load a sound and set it as the Audio object's buffer
   let audioLoader = new THREE.AudioLoader();
   audioLoader.load( 'assets/sounds/rain_with_bats.wav', function( buffer ) {
   sound.setBuffer( buffer );
@@ -172,7 +171,6 @@ function init() {
 
   //music
   let music = new THREE.Audio( listener );
-
   let musicLoader = new THREE.AudioLoader();
   musicLoader.load( 'assets/sounds/music.mp3', function( buffer ) {
   music.setBuffer( buffer );
@@ -186,7 +184,7 @@ function init() {
   scene = new THREE.Scene();
   scene.background = new THREE.Color( 0x000000 );
   scene.fog = new THREE.Fog( 0x000000, 0, 500 );
-  let light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 0.65 );
+  let light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 1 );
   light.position.set( 0.5, 1, 0.75 );
   scene.add( light );
 
@@ -196,6 +194,7 @@ function init() {
 
   let startGame = document.querySelector('.start');
   let startImage = document.querySelector('.start-image')
+  let winImage = document.querySelector('.win-image')
   let instructions = document.querySelector('.instructions');
   let mouseImage = document.querySelector('.mouse');
   let startText = document.querySelector('.start-text');
@@ -221,8 +220,6 @@ function init() {
       if(winGame){
         isGameStartedTimer = false;
       }
-    //
-
   }, false );
 
   keepPlaying.addEventListener( 'click', function () {
@@ -235,7 +232,6 @@ function init() {
     startImage.style.display = 'none';
     mouseImage.style.display = 'initial';
     pause.style.display = 'none';
-
     controls.lock();
     camera.position.y = 50;
 
@@ -260,15 +256,10 @@ function init() {
       pause.style.display = 'flex';
     }
   } );
-
-  if(winGame) {
-    camera.position.y = 50;
-  }
-
   scene.add( controls.getObject() );
 
 
-// KEY MOVEMENT
+  // KEY MOVEMENT
   let onKeyDown = function ( event ) {
     switch ( event.keyCode ) {
       case 38: // up
@@ -398,6 +389,34 @@ function init() {
   particleSystem = new THREE.Points(magicParticles, pMaterial);
   scene.add(particleSystem);
 
+  
+  // GEMSTONE PARTICLES
+  loader = new THREE.TextureLoader();
+  loader.crossOrigin = '';
+  gemstoneParticleCount = 150;
+  pMaterial = new THREE.PointsMaterial({
+    color: 0x9872ff,
+    size: 12,
+    map: loader.load(
+      "assets/particleImages/magicParticle.png"
+     ),
+     blending: THREE.AdditiveBlending,
+     depthTest: true,
+     transparent: true
+  });
+  gemstoneParticles = new THREE.Geometry;
+  for (let i = 0; i < gemstoneParticleCount; i++) {
+    let pX = Math.random()*80 + 500,
+        pY = Math.random()*300 + 50,
+        pZ = Math.random()*80 - 290,
+          particle = new THREE.Vector3(pX, pY, pZ);
+      particle.velocity = {};
+      particle.velocity.y = 0;
+      gemstoneParticles.vertices.push(particle);
+  }
+  particleSystem = new THREE.Points(gemstoneParticles, pMaterial);
+  scene.add(particleSystem);
+  
 
   // RAYCASTER
   raycaster = new THREE.Raycaster();
@@ -410,9 +429,6 @@ function init() {
   renderer.setSize( window.innerWidth, window.innerHeight );
   document.body.appendChild( renderer.domElement );
   window.addEventListener( 'resize', onWindowResize, false );
-
-  //ORBITCONTROL
-  // controls = new THREE.OrbitControls(camera, document, renderer.domElement);
 }
 
 function onWindowResize() {
@@ -424,9 +440,7 @@ function onWindowResize() {
 //POINTERLOCK
 function onDocumentMouseDown( event ) {
   event.preventDefault();
-
   raycaster.ray.origin.copy( controls.getObject().position );
-  // raycaster.ray.origin.y -= 10;
   raycaster.setFromCamera( mouse, camera );
   let intersects = raycaster.intersectObjects( objects );
   if(intersects.length > 0) {
@@ -464,27 +478,36 @@ function animate() {
 
     velocity.x -= velocity.x * 5.8 * delta;
     velocity.z -= velocity.z * 5.8 * delta;
-    velocity.y -= 9.8 * 100.0 * delta; // 100 = mass
 
     direction.z = Number( moveForward ) - Number( moveBackward );
     direction.x = Number( moveLeft ) - Number( moveRight );
     direction.normalize();
 
-    if ( moveForward || moveBackward ) velocity.z -= direction.z * 400.0 * delta; //changed from 400
-    if ( moveLeft || moveRight ) velocity.x -= direction.x * 400.0 * delta; //changed from 400
+    if ( moveForward || moveBackward ) velocity.z -= direction.z * 600.0 * delta; 
+    if ( moveLeft || moveRight ) velocity.x -= direction.x * 600.0 * delta; 
 
     controls.getObject().translateX( velocity.x * delta );
-    controls.getObject().position.y += ( velocity.y * delta ); // new behavior
+    controls.getObject().position.y += ( velocity.y * delta );
     controls.getObject().translateZ( velocity.z * delta );
-
-    if ( controls.getObject().position.y < 50 ) {
-      velocity.y = 0;
-      controls.getObject().position.y = 50;
-    }
-
     prevTime = time;
 
+        
+    //GEMSTONE PARTICLES ANIMATION
+    function simulateGemstoneParticles() {
+      let pCount = gemstoneParticleCount;
+      while (pCount--) {
+      let gemstoneParticle = gemstoneParticles.vertices[pCount];
+      if(gemstoneParticle.y > 330) {
+        gemstoneParticle.y = 55;
+      }
+      gemstoneParticle.y += 0.6;
+      }
+      gemstoneParticles.verticesNeedUpdate = true;
+    };
+    simulateGemstoneParticles();
+  }
 
+  
     // limit walking in map
     if(camera.position.z >= 910) {
       camera.position.z = 910;
@@ -499,16 +522,39 @@ function animate() {
       camera.position.x = -910;
     }
 
+    // limit castle
+    if(camera.position.x > 410 && camera.position.z > 440) {
+      camera.position.x = 410;
+    }
+    if(camera.position.x > 420 && camera.position.z > 430) {
+      camera.position.z = 430;
+    }
+
+    // limit stones
+    if(camera.position.x < -565 && camera.position.z < -175 && camera.position.x > -790) {
+      camera.position.x = -565;
+    }
+    if(camera.position.x < -570  && camera.position.z < -170 && camera.position.x > -790) {
+      camera.position.z = -170;
+    }
+    if(camera.position.x > -795  && camera.position.z < -170 && camera.position.x < -575) {
+      camera.position.x = -795;
+    }
+    
+      // camera.position.x > -620 &&
+  // if(camera.position.x > 420 && camera.position.z > 430) {
+  //   camera.position.z = 430;
+  // }
+  // console.log(camera.position.x)
+  // console.log(camera.position.z)
+
 
     // BAT ANIMATION
     function animateBat(){
-
       batTheta += batDTheta;
       bats[0].position.x = batRadius * Math.cos(batTheta);
       bats[0].position.z = batRadius * Math.sin(batTheta);
-
       bats[0].rotation.z += batDTheta;
-
       bats[0].verticesNeedUpdate = true;
     }
     animateBat();
@@ -526,8 +572,6 @@ function animate() {
       smallStones[0].rotation.z += smallStoneDTheta;
       // 590, 50, -250
 
-     
-
       //small stone 2
       smallStone2Theta += smallStone2DTheta;
       smallStones2[0].position.x = 540 + smallStone2Radius * Math.cos(smallStone2Theta);
@@ -542,51 +586,46 @@ function animate() {
       smallStones3[0].rotation.z += smallStone3DTheta;
       // 510, 50, -200
 
-
       smallStones[0].verticesNeedUpdate = true;
       smallStones2[0].verticesNeedUpdate = true;
       smallStones3[0].verticesNeedUpdate = true;
       bigStones[0].verticesNeedUpdate = true;
-
     }
     console.log(smallStones[0]);
     animateSmallStone()
+
+
+  //RAIN ANIMATION
+  function simulateRain() {
+    let pCount = rainParticleCount;
+    while (pCount--) {
+    let rainParticle = rainParticles.vertices[pCount];
+    if (rainParticle.y < 10) {
+      rainParticle.y = 100;
+      rainParticle.velocity.y = 0;
+    }
+    rainParticle.velocity.y -= Math.random() * 0.7;
+    rainParticle.y += rainParticle.velocity.y;
+    }
+    rainParticles.verticesNeedUpdate = true;
+  };
+  simulateRain();
+
+
+  //MAGIC PARTICLES ANIMATION
+  function simulateMagicParticles() {
+    let pCount = magicParticleCount;
+    while (pCount--) {
+    let magicParticle = magicParticles.vertices[pCount];
+    if(magicParticle.y > 120) {
+      magicParticle.y = 20;
+    }
+    magicParticle.y += 0.07;
+    }
+    magicParticles.verticesNeedUpdate = true;
+  };
+  simulateMagicParticles();
   
-    
-
-
-    //RAIN ANIMATION
-    function simulateRain() {
-      let pCount = rainParticleCount;
-      while (pCount--) {
-      let rainParticle = rainParticles.vertices[pCount];
-      if (rainParticle.y < 10) {
-        rainParticle.y = 100;
-        rainParticle.velocity.y = 0;
-      }
-      rainParticle.velocity.y -= Math.random() * 0.7;
-      rainParticle.y += rainParticle.velocity.y;
-      }
-      rainParticles.verticesNeedUpdate = true;
-    };
-    // particleSystem.rotation.y += 0.0015;
-    simulateRain();
-
-    //MAGIC PARTICLES ANIMATION
-
-    function simulateMagicParticles() {
-      let pCount = magicParticleCount;
-      while (pCount--) {
-      let magicParticle = magicParticles.vertices[pCount];
-      if(magicParticle.y > 120) {
-        magicParticle.y = 20;
-      }
-      magicParticle.y += 0.07;
-      }
-      magicParticles.verticesNeedUpdate = true;
-    };
-    // particleSystem.rotation.y += 0.0015;
-    simulateMagicParticles();
-  }
   renderer.render( scene, camera );
 }
+

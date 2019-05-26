@@ -8,7 +8,7 @@
     house.position.set(-350, -55, 200)
     house.scale.set(2,2,2)
     scene.add(house);
-    let light = new THREE.PointLight( 0x8539F8, 3, 95);
+    let light = new THREE.PointLight( 0x3A57F8, 4, 130);
     light.position.set( -350, 10, 280 );
     scene.add(light);
   });
@@ -18,7 +18,7 @@
     house.scale.set(1.5,1.5,1.5)
     house.rotation.y = Math.PI / 1.4;
     scene.add( house );
-    let light = new THREE.PointLight( 0x8539F8, 3, 85);
+    let light = new THREE.PointLight( 0x3A57F8, 4, 120);
     light.position.set( -320, 10, -330 );
     scene.add( light );
   });
@@ -28,7 +28,7 @@
     house.scale.set(1.8,1.8,1.8)
     house.rotation.y = Math.PI / 3;
     scene.add( house );
-    let light = new THREE.PointLight( 0x8539F8, 3, 70);
+    let light = new THREE.PointLight( 0x3A57F8, 4, 100);
     light.position.set( -410, 30, 600 );
     scene.add( light );
   });
@@ -38,7 +38,7 @@
     house.scale.set(1.7,1.7,1.7)
     house.rotation.y = Math.PI / 5;
     scene.add( house );
-    let light = new THREE.PointLight( 0x8539F8, 3, 80);
+    let light = new THREE.PointLight( 0x3A57F8, 4, 110);
     light.position.set( -320, 70, -500 );
     scene.add( light );
   });
@@ -47,7 +47,7 @@
     house.position.set(-200, -5, 600)
     house.scale.set(2,2,2);
     scene.add( house );
-    let light = new THREE.PointLight( 0x8539F8, 4, 85);
+    let light = new THREE.PointLight( 0x3A57F8, 4.5, 120);
     light.position.set( -190, 80, 670 );
     scene.add( light );
   });
@@ -94,14 +94,14 @@
         child.material.map = texture;
       }});
     scene.add( lantern );
-    let light = new THREE.PointLight( 0xF85147, 1.5, 450);
+    let light = new THREE.PointLight( 0x8539F8, 1.5, 450);
     light.position.set( 220, 5, -540 );
     scene.add( light );
   });
 
   //lantern outside spike fence
   loader.load(lanternFile, (lantern) => {
-    lantern.position.set(150, 1, 600)
+    lantern.position.set(50, 1, 600)
     lantern.rotation.y = Math.PI / 2;
     lantern.scale.set(1.6,1.6,1.6)
     let texture = new THREE.TextureLoader().load(lanternTexture);
@@ -111,7 +111,7 @@
       }});
     scene.add( lantern );
     let light = new THREE.PointLight( 0x8539F8, 1.5, 450);
-    light.position.set( 130, 10, 600 );
+    light.position.set( 30, 10, 600 );
     scene.add( light );
   });
 
@@ -157,7 +157,7 @@
         child.material.map = texture;
       }});
     scene.add( lantern );
-    let light = new THREE.PointLight( 0xFF0000, 1.8, 300);
+    let light = new THREE.PointLight( 0xFF0000, 2, 300);
     light.position.set( -780, 5, -580 );
     scene.add( light );
   });
@@ -172,7 +172,7 @@
         child.material.map = texture;
       }});
     scene.add( lantern );
-    let light = new THREE.PointLight( 0x8539F8, 1.8, 300);
+    let light = new THREE.PointLight( 0x8539F8, 2.5, 300);
     light.position.set( -580, 5, 700 );
     scene.add( light );
   });
@@ -187,7 +187,7 @@
         child.material.map = texture;
       }});
     scene.add( lantern );
-    let light = new THREE.PointLight( 0x8539F8, 1.8, 300);
+    let light = new THREE.PointLight( 0x8539F8, 2.5, 300);
     light.position.set( -700, 5, 400 );
     scene.add( light );
   });
@@ -202,7 +202,7 @@
         child.material.map = texture;
       }});
     scene.add( lantern );
-    let light = new THREE.PointLight( 0x8539F8, 1.8, 300);
+    let light = new THREE.PointLight( 0x8539F8, 2.5, 300);
     light.position.set( -520, 5, 400 );
     scene.add( light );
   });
@@ -242,7 +242,7 @@
   // TREES
   //4-trees model outside of garden
   let fourTreesFile = 'models/fbxObjects/ScaryTrees.fbx';
-  for(let i = 0; i < 15; i ++) {
+  for(let i = 0; i < 16; i ++) {
     loader.load(fourTreesFile, (tree) => {
       tree.position.x = Math.floor( Math.random() * 20 - 10 ) * 70 + 120;
       tree.position.y = -1;
@@ -253,7 +253,7 @@
   }
 
   //4-trees model outside corner
-  for(let i = 0; i < 8; i ++) {
+  for(let i = 0; i < 12; i ++) {
     loader.load(fourTreesFile, (tree) => {
       tree.position.x = Math.floor( Math.random() * 20 - 10 ) * 35 + -180;
       tree.position.y = -1;
@@ -263,9 +263,9 @@
   }
 
   //4-trees model outside on corner of map with stones
-  for(let i = 0; i < 8; i ++) {
+  for(let i = 0; i < 10; i ++) {
     loader.load(fourTreesFile, (tree) => {
-      tree.position.x = Math.floor( Math.random() * 20 - 10 ) * 8 -880;
+      tree.position.x = Math.floor( Math.random() * 20 - 10 ) * 12 -860;
       tree.position.y = -1;
       tree.position.z = Math.floor( Math.random() * 20 - 10 ) * 50 + 350;
       tree.rotation.y = Math.PI / 2;
@@ -326,53 +326,53 @@
   // ROCKS
   // rocks around tower left side
   let rocksFile = 'models/fbxObjects/rock3.fbx';
-  for(let i = 0; i < 10; i ++) {
+  for(let i = 0; i < 12; i ++) {
     loader.load(rocksFile, (rock) => {
       rock.position.x = Math.floor( Math.random() * 20 - 10 ) * 8 + 880;
       rock.position.y = -2;
       rock.position.z = Math.floor( Math.random() * 20 - 10 ) * 50 + 50;
       rock.rotation.y = Math.floor(Math.random() * 5);
-      rock.scale.set(0.4,0.4,0.4);
+      rock.scale.set(1.2,1.2,1.2);
       scene.add(rock);
     });
   }
 
   // rocks around tower right side
-  for(let i = 0; i < 3; i ++) {
+  for(let i = 0; i < 5; i ++) {
     loader.load(rocksFile, (rock) => {
-      rock.position.x = Math.floor( Math.random() * 20 - 10 ) * 5 + 160;
+      rock.position.x = Math.floor( Math.random() * 20 - 10 ) * 5 + 60;
       rock.position.y = -2;
       rock.position.z = Math.floor( Math.random() * 20 - 10 ) * 10 + 650;
       rock.rotation.y = Math.floor(Math.random() * 5);
-      rock.scale.set(0.4,0.4,0.4);
+      rock.scale.set(0.7,0.7,0.7);
       scene.add(rock);
     });
   }
 
   // rocks around tower outside left
-  for(let i = 0; i < 5; i ++ ){
+  for(let i = 0; i < 8; i ++ ){
     loader.load(rocksFile, (rock) => {
       rock.position.x = Math.floor( Math.random() * 20 - 10 ) * 5 + 210;
       rock.position.y = -2;
       rock.position.z = Math.floor( Math.random() * 20 - 10 ) * 20 -550;
       rock.rotation.y = Math.floor(Math.random() * 5);
-      rock.scale.set(0.3,0.3,0.3);
+      rock.scale.set(0.6,0.6,0.6);
       scene.add(rock);
     });
   }
 
   // rocks corner of forest
-  for(let i = 0; i < 3; i ++) {
+  for(let i = 0; i < 5; i ++) {
     loader.load(rocksFile, (rock) => {
       rock.position.x = Math.floor( Math.random() * 20 - 10 ) * 5 -400;
       rock.position.y = -2;
       rock.position.z = Math.floor( Math.random() * 20 - 10 ) * 15 -450;
-      rock.scale.set(1.5,1.5,1.5);
+      rock.scale.set(1,1,1);
       scene.add(rock);
     });
   }
 
-  for(let i = 0; i < 7; i ++) {
+  for(let i = 0; i < 10; i ++) {
     loader.load(rocksFile, (rock) => {
       rock.position.x = Math.floor( Math.random() * 20 - 10 ) * 10 -350;
       rock.position.y = -2;
@@ -382,7 +382,7 @@
     });
   }
 
-  for(let i = 0; i < 5; i ++) {
+  for(let i = 0; i < 8; i ++) {
     loader.load(rocksFile, (rock) => {
       rock.position.x = Math.floor( Math.random() * 20 - 10 ) * 5 -660;
       rock.position.y = -2;
@@ -417,8 +417,8 @@
   });
 
   loader.load(rocksFile, (rock) => {
-    rock.position.set(-550, -2, -20)
-    rock.scale.set(2.6,2.6,2.6);
+    rock.position.set(-520, -2, -20)
+    rock.scale.set(2.8,2.8,2.8);
     scene.add(rock);
   });
 
@@ -447,7 +447,7 @@
   });
 
   // rocks corner of forest
-  for(let i = 0; i < 5; i ++) {
+  for(let i = 0; i < 8; i ++) {
     loader.load(rocksFile, (rock) => {
       rock.position.x = Math.floor( Math.random() * 20 - 10 ) * 5 -860;
       rock.position.y = -2;

@@ -15,7 +15,7 @@ audioLoader.load( 'assets/sounds/fireplace.wav', function ( buffer ) {
 	fireplaceSound.setBuffer( buffer );
     fireplaceSound.setRefDistance( 20 );
     fireplaceSound.setLoop( true );
-	fireplaceSound.setVolume( 1.4 );
+	fireplaceSound.setVolume( 3 );
 	fireplaceSound.play();
 } );
 
