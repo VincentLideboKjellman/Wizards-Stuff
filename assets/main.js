@@ -209,7 +209,6 @@ function init() {
     controls.lock();
 
     //count up timer
-    // count up timer
     let isGameStartedTimer = true;
 
     if(isGameStartedTimer){
@@ -222,6 +221,7 @@ function init() {
       if(winGame){
         isGameStartedTimer = false;
       }
+    //
 
   }, false );
 
