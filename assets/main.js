@@ -26,38 +26,36 @@ let gemstoneParticleCount, gemstoneParticles;
 
 //BAT VARIABLES
 let bats = [];
-
-//for bar animation
 //orbital radius
-var batRadius = 350; 
-
+let batRadius = 350;
 // start angle
-var batTheta = 0;
-
+let batTheta = 0;
 //angle increment value
-var batDTheta = 2 * Math.PI / 350; 
+let batDTheta = 2 * Math.PI / 350;
 
-//STONES VARIABLES
+//STONES letIABLES
 let bigStones = [];
 
 //small stone 1
 let smallStones = [];
-var smallStoneRadius = 40;
-var smallStoneTheta = 90;
-var smallStoneDTheta = 2 * Math.PI / 800;
+let smallStoneRadius = 40;
+let smallStoneTheta = 90;
+let smallStoneDTheta = 2 * Math.PI / 800;
 
 //small stone 2
 let smallStones2 = [];
-var smallStone2Radius = 40;
-var smallStone2Theta = 180;
-var smallStone2DTheta = 2 * Math.PI / 800;
+let smallStone2Radius = 40;
+let smallStone2Theta = 180;
+let smallStone2DTheta = 2 * Math.PI / 800;
 
 //small stone 3
 let smallStones3 = [];
-var smallStone3Radius = 40;
-var smallStone3Theta = 0;
-var smallStone3DTheta = 2 * Math.PI / 800;
+let smallStone3Radius = 40;
+let smallStone3Theta = 0;
+let smallStone3DTheta = 2 * Math.PI / 800;
 
+
+// let dateTime;
 
 init();
 animate();
@@ -67,7 +65,7 @@ function init() {
   camera.position.y = 50;
 
 
-  //BAT OBJECT
+  //BAT OBJECT 1
   new THREE.OBJLoader()
   .load('models/obj/bat.obj', (bat) => {
     let texture = new THREE.TextureLoader().load('models/obj/assets_texture.jpg');
@@ -77,14 +75,50 @@ function init() {
       }});
     scene.add(bat);
     bat.position.x = 680;
-    // bat.position.y = Math.floor( Math.random() * 40 + 100);
     bat.position.y = 200;
     bat.position.z = 66;
     bat.rotation.x = Math.PI / 2;
     bat.rotation.z = 0; // starting position so it matches how it starts to fly
-    bat.scale.set(50,50,50)
+    bat.scale.set(65,65,65)
     bats.push(bat);
   });
+
+  //BAT OBJECT 2
+  new THREE.OBJLoader()
+  .load('models/obj/bat.obj', (bat) => {
+    let texture = new THREE.TextureLoader().load('models/obj/assets_texture.jpg');
+    bat.traverse((child) => {
+      if (child instanceof THREE.Mesh) {
+        child.material.map = texture;
+      }});
+    scene.add(bat);
+    bat.position.x = 360;
+    bat.position.y = 190;
+    bat.position.z = 300;
+    bat.rotation.x = Math.PI / 2;
+    bat.rotation.z = 0; // starting position so it matches how it starts to fly
+    bat.scale.set(65,65,65)
+    bats.push(bat);
+  });
+
+  //BAT OBJECT 3
+  new THREE.OBJLoader()
+  .load('models/obj/bat.obj', (bat) => {
+    let texture = new THREE.TextureLoader().load('models/obj/assets_texture.jpg');
+    bat.traverse((child) => {
+      if (child instanceof THREE.Mesh) {
+        child.material.map = texture;
+      }});
+    scene.add(bat);
+    bat.position.x = 620;
+    bat.position.y = 180;
+    bat.position.z = 80;
+    bat.rotation.x = Math.PI / 2;
+    bat.rotation.z = 0; // starting position so it matches how it starts to fly
+    bat.scale.set(60,60,60)
+    bats.push(bat);
+  });
+
 
   //STONE OBJECT
   //big stone
@@ -169,13 +203,13 @@ function init() {
   sound.play();
   });
 
-  //music
+  //music global
   let music = new THREE.Audio( listener );
   let musicLoader = new THREE.AudioLoader();
   musicLoader.load( 'assets/sounds/music.mp3', function( buffer ) {
   music.setBuffer( buffer );
   music.setLoop( true );
-  music.setVolume( 0.1 );
+  music.setVolume( 0.07 );
   music.play();
   });
 
@@ -211,11 +245,11 @@ function init() {
     let isGameStartedTimer = true;
 
     if(isGameStartedTimer){
-      var today = new Date();
-      var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-      var dateTime = date+' '+time;
-      countUpFromTime(dateTime, 'countup1');
+      let today = new Date();
+      let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      let dateTime = date+' '+time;
+      // countUpFromTime(dateTime, 'countup1');
     }
       if(winGame){
         isGameStartedTimer = false;
@@ -389,7 +423,7 @@ function init() {
   particleSystem = new THREE.Points(magicParticles, pMaterial);
   scene.add(particleSystem);
 
-  
+
   // GEMSTONE PARTICLES
   loader = new THREE.TextureLoader();
   loader.crossOrigin = '';
@@ -416,7 +450,7 @@ function init() {
   }
   particleSystem = new THREE.Points(gemstoneParticles, pMaterial);
   scene.add(particleSystem);
-  
+
 
   // RAYCASTER
   raycaster = new THREE.Raycaster();
@@ -454,6 +488,8 @@ function onDocumentMouseMove( event ) {
   mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 }
 
+
+
 function animate() {
   requestAnimationFrame( animate );
   if ( controls.isLocked === true ) {
@@ -475,7 +511,6 @@ function animate() {
     // MOUSE MOVEMENT
     let time = performance.now();
     let delta = ( time - prevTime ) / 1000;
-
     velocity.x -= velocity.x * 5.8 * delta;
     velocity.z -= velocity.z * 5.8 * delta;
 
@@ -483,15 +518,15 @@ function animate() {
     direction.x = Number( moveLeft ) - Number( moveRight );
     direction.normalize();
 
-    if ( moveForward || moveBackward ) velocity.z -= direction.z * 600.0 * delta; 
-    if ( moveLeft || moveRight ) velocity.x -= direction.x * 600.0 * delta; 
+    if ( moveForward || moveBackward ) velocity.z -= direction.z * 550.0 * delta;
+    if ( moveLeft || moveRight ) velocity.x -= direction.x * 550.0 * delta;
 
     controls.getObject().translateX( velocity.x * delta );
     controls.getObject().position.y += ( velocity.y * delta );
     controls.getObject().translateZ( velocity.z * delta );
     prevTime = time;
 
-        
+
     //GEMSTONE PARTICLES ANIMATION
     function simulateGemstoneParticles() {
       let pCount = gemstoneParticleCount;
@@ -505,9 +540,60 @@ function animate() {
       gemstoneParticles.verticesNeedUpdate = true;
     };
     simulateGemstoneParticles();
+
+    //SMALL STONE ANIMATION
+    function animateSmallStone(){
+
+      bigStones[0].rotation.z += 0.03;
+
+      //small stone 1
+      smallStoneTheta += smallStoneDTheta;
+      smallStones[0].position.x = 540 + smallStoneRadius * Math.cos(smallStoneTheta);
+      smallStones[0].position.z = -250 + smallStoneRadius * Math.sin(smallStoneTheta);
+      smallStones[0].rotation.z += smallStoneDTheta;
+
+      //small stone 2
+      smallStone2Theta += smallStone2DTheta;
+      smallStones2[0].position.x = 540 + smallStone2Radius * Math.cos(smallStone2Theta);
+      smallStones2[0].position.z = -250 + smallStone2Radius * Math.sin(smallStone2Theta);
+      smallStones2[0].rotation.z += smallStone2DTheta;
+
+      //small stone 3
+      smallStone3Theta += smallStone3DTheta;
+      smallStones3[0].position.x = 540 + smallStone3Radius * Math.cos(smallStone3Theta);
+      smallStones3[0].position.z = -250 + smallStone3Radius * Math.sin(smallStone3Theta);
+      smallStones3[0].rotation.z += smallStone3DTheta;
+
+      smallStones[0].verticesNeedUpdate = true;
+      smallStones2[0].verticesNeedUpdate = true;
+      smallStones3[0].verticesNeedUpdate = true;
+      bigStones[0].verticesNeedUpdate = true;
+    }
+    animateSmallStone()
+
+
+    // BAT ANIMATION
+    function animateBat(){
+      batTheta += batDTheta;
+      bats[0].position.x = 100 + batRadius * Math.cos(batTheta);
+      bats[0].position.z = batRadius * Math.sin(batTheta);
+      bats[0].rotation.z += batDTheta;
+      bats[0].verticesNeedUpdate = true;
+
+      bats[1].position.x = batRadius * Math.cos(batTheta);
+      bats[1].position.z = batRadius * Math.sin(batTheta);
+      bats[1].rotation.z += batDTheta;
+      bats[1].verticesNeedUpdate = true;
+
+      bats[2].position.x = 350 + batRadius * Math.cos(batTheta);
+      bats[2].position.z = batRadius * Math.sin(batTheta);
+      bats[2].rotation.z += batDTheta;
+      bats[2].verticesNeedUpdate = true;
+    }
+    animateBat();
   }
 
-  
+
     // limit walking in map
     if(camera.position.z >= 910) {
       camera.position.z = 910;
@@ -540,59 +626,13 @@ function animate() {
     if(camera.position.x > -795  && camera.position.z < -170 && camera.position.x < -575) {
       camera.position.x = -795;
     }
-    
+
       // camera.position.x > -620 &&
   // if(camera.position.x > 420 && camera.position.z > 430) {
   //   camera.position.z = 430;
   // }
   // console.log(camera.position.x)
   // console.log(camera.position.z)
-
-
-    // BAT ANIMATION
-    function animateBat(){
-      batTheta += batDTheta;
-      bats[0].position.x = batRadius * Math.cos(batTheta);
-      bats[0].position.z = batRadius * Math.sin(batTheta);
-      bats[0].rotation.z += batDTheta;
-      bats[0].verticesNeedUpdate = true;
-    }
-    animateBat();
-
-    //SMALL STONE ANIMATION
-    function animateSmallStone(){
-      //big stone
-      bigStones[0].rotation.z += 0.03;
-      // 540, 30, -250  // big stone, or middle
-
-      //small stone 1
-      smallStoneTheta += smallStoneDTheta;
-      smallStones[0].position.x = 540 + smallStoneRadius * Math.cos(smallStoneTheta);
-      smallStones[0].position.z = -250 + smallStoneRadius * Math.sin(smallStoneTheta);
-      smallStones[0].rotation.z += smallStoneDTheta;
-      // 590, 50, -250
-
-      //small stone 2
-      smallStone2Theta += smallStone2DTheta;
-      smallStones2[0].position.x = 540 + smallStone2Radius * Math.cos(smallStone2Theta);
-      smallStones2[0].position.z = -250 + smallStone2Radius * Math.sin(smallStone2Theta);
-      smallStones2[0].rotation.z += smallStone2DTheta;
-      // 510, 50, -300
-
-      //small stone 3
-      smallStone3Theta += smallStone3DTheta;
-      smallStones3[0].position.x = 540 + smallStone3Radius * Math.cos(smallStone3Theta);
-      smallStones3[0].position.z = -250 + smallStone3Radius * Math.sin(smallStone3Theta);
-      smallStones3[0].rotation.z += smallStone3DTheta;
-      // 510, 50, -200
-
-      smallStones[0].verticesNeedUpdate = true;
-      smallStones2[0].verticesNeedUpdate = true;
-      smallStones3[0].verticesNeedUpdate = true;
-      bigStones[0].verticesNeedUpdate = true;
-    }
-    console.log(smallStones[0]);
-    animateSmallStone()
 
 
   //RAIN ANIMATION
@@ -625,7 +665,6 @@ function animate() {
     magicParticles.verticesNeedUpdate = true;
   };
   simulateMagicParticles();
-  
+
   renderer.render( scene, camera );
 }
-
