@@ -15,7 +15,7 @@ audioLoader.load( 'assets/sounds/raven.wav', function ( buffer ) {
 	ravenSound.setBuffer( buffer );
     ravenSound.setRefDistance( 20 );
     ravenSound.setLoop( true );
-	ravenSound.setVolume( 1 );
+	ravenSound.setVolume( 1.6 );
 	ravenSound.play();
 } );
 

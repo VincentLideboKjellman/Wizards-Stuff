@@ -14,7 +14,7 @@ new THREE.OBJLoader()
       child.material.map = texture;
     }});
   scene.add(object);
-  object.position.set(0, 33, 650)
+  object.position.set(-60, 33, 650)
   object.scale.set(70,70,70)
 });
 
@@ -73,7 +73,7 @@ new THREE.OBJLoader()
       child.material.map = texture;
     }});
   scene.add(object);
-  object.position.set(540, 50, -250)
+  object.position.set(540, 40, -250)
   object.rotation.x = -Math.PI / 2;
   object.rotation.z = -Math.PI / 2;
   object.scale.set(0.8,0.8,0.8)
@@ -90,7 +90,7 @@ new THREE.OBJLoader()
       child.material.map = texture;
     }});
   scene.add(object);
-  object.position.set(590, 50, -250)
+  object.position.set(590, 40, -250)
   object.rotation.x = -Math.PI / 2;
   object.rotation.z = -Math.PI / 2;
   object.scale.set(0.5,0.5,0.5)
@@ -104,7 +104,7 @@ new THREE.OBJLoader()
       child.material.map = texture;
     }});
   scene.add(object);
-  object.position.set(510, 50, -300)
+  object.position.set(510, 40, -300)
   object.rotation.x = -Math.PI / 2;
   object.rotation.z = -Math.PI / 2;
   object.scale.set(0.5,0.5,0.5)
@@ -118,7 +118,7 @@ new THREE.OBJLoader()
       child.material.map = texture;
     }});
   scene.add(object);
-  object.position.set(510, 50, -200)
+  object.position.set(510, 40, -200)
   object.rotation.x = -Math.PI / 2;
   object.rotation.z = -Math.PI / 2;
   object.scale.set(0.5,0.5,0.5)
@@ -222,7 +222,7 @@ new THREE.OBJLoader()
   object.scale.set(0.7,0.7,0.7);
 });
 
-
+//
 // Big tower
 OBJFile = 'models/castle/Tower.obj';
 let JPGFile = 'models/castle/Palette3.png';
@@ -342,7 +342,7 @@ new THREE.OBJLoader()
       child.material.map = texture;
     }});
   scene.add(object);
-  object.position.set(160, -100, 680)
+  object.position.set(60, -100, 680)
   object.rotation.y = -16;
 });
 
@@ -457,7 +457,7 @@ new THREE.OBJLoader()
       child.material.map = texture;
     }});
   scene.add(object);
-  object.position.set(200, -1,590)
+  object.position.set(100, -1,590)
   object.rotation.y = 2.35;
 });
 
@@ -470,7 +470,7 @@ new THREE.OBJLoader()
       child.material.map = texture;
     }});
   scene.add(object);
-  object.position.set(290, -1,502)
+  object.position.set(190, -1,502)
   object.rotation.y = 2.35;
 });
 
@@ -483,7 +483,7 @@ new THREE.OBJLoader()
       child.material.map = texture;
     }});
   scene.add(object);
-  object.position.set(400, -1, 450)
+  object.position.set(300, -1, 450)
   object.rotation.y = 1.7;
 });
 
@@ -509,7 +509,7 @@ new THREE.OBJLoader()
       child.material.map = texture;
     }});
   scene.add(object);
-  object.position.set(100, -1, 765)
+  object.position.set(0, -1, 765)
   object.rotation.y = 2.7;
 });
 

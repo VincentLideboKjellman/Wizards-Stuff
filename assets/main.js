@@ -19,15 +19,14 @@ let mouse = new THREE.Vector2(), INTERSECTED;
 let winGame = false;
 
 // RAIN VARIABLESoHOHO
-let particleSystem, rainParticleCount, rainParticles, pMaterial;
+let particleSystem, pMaterial
+let rainParticleCount, rainParticles;
 let magicParticleCount, magicParticles;
+let gemstoneParticleCount, gemstoneParticles;
 
-//test comment
 //For animations etc ( almost like Date but better apparently)
 let clock = new THREE.Clock();
 
-
-//ny kod lalala
 
 init();
 animate();
@@ -35,7 +34,6 @@ animate();
 function init() {
   camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
   camera.position.y = 50;
-
 
 
   //SOUNDS
@@ -60,7 +58,7 @@ function init() {
   scene = new THREE.Scene();
   scene.background = new THREE.Color( 0x000000 );
   scene.fog = new THREE.Fog( 0x000000, 0, 500 );
-  let light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 0.65 );
+  let light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 1 );
   light.position.set( 0.5, 1, 0.75 );
   scene.add( light );
 
@@ -70,6 +68,7 @@ function init() {
 
   let startGame = document.querySelector('.start');
   let startImage = document.querySelector('.start-image')
+  let winImage = document.querySelector('.win-image')
   let instructions = document.querySelector('.instructions');
   let mouseImage = document.querySelector('.mouse');
   let startText = document.querySelector('.start-text');
@@ -93,7 +92,6 @@ function init() {
     startImage.style.display = 'none';
     mouseImage.style.display = 'initial';
     pause.style.display = 'none';
-
     controls.lock();
     camera.position.y = 50;
 
@@ -118,15 +116,10 @@ function init() {
       pause.style.display = 'flex';
     }
   } );
-
-  if(winGame) {
-    camera.position.y = 50;
-  }
-
   scene.add( controls.getObject() );
 
 
-// KEY MOVEMENT
+  // KEY MOVEMENT
   let onKeyDown = function ( event ) {
     switch ( event.keyCode ) {
       case 38: // up
@@ -198,11 +191,9 @@ function init() {
   scene.add( floor );
 
 
-
   //RAIN CODE
   let loader = new THREE.TextureLoader();
   loader.crossOrigin = '';
-  //RAIN
   rainParticleCount = 7000;
   pMaterial = new THREE.PointsMaterial({
     color: 0xFFFFFF,
@@ -231,8 +222,7 @@ function init() {
   //MAGIC PARTICLES
   loader = new THREE.TextureLoader();
   loader.crossOrigin = '';
-  //Particles
-  magicParticleCount = 800;
+  magicParticleCount = 1000;
   pMaterial = new THREE.PointsMaterial({
     color: 0xFFFFFF,
     size: 3,
@@ -257,6 +247,34 @@ function init() {
   scene.add(particleSystem);
 
 
+  // GEMSTONE PARTICLES
+  loader = new THREE.TextureLoader();
+  loader.crossOrigin = '';
+  gemstoneParticleCount = 150;
+  pMaterial = new THREE.PointsMaterial({
+    color: 0x9872ff,
+    size: 12,
+    map: loader.load(
+      "assets/particleImages/magicParticle.png"
+     ),
+     blending: THREE.AdditiveBlending,
+     depthTest: true,
+     transparent: true
+  });
+  gemstoneParticles = new THREE.Geometry;
+  for (let i = 0; i < gemstoneParticleCount; i++) {
+    let pX = Math.random()*80 + 500,
+        pY = Math.random()*300 + 50,
+        pZ = Math.random()*80 - 290,
+          particle = new THREE.Vector3(pX, pY, pZ);
+      particle.velocity = {};
+      particle.velocity.y = 0;
+      gemstoneParticles.vertices.push(particle);
+  }
+  particleSystem = new THREE.Points(gemstoneParticles, pMaterial);
+  scene.add(particleSystem);
+
+
   // RAYCASTER
   raycaster = new THREE.Raycaster();
   document.addEventListener('mousedown', onDocumentMouseDown, false);
@@ -268,9 +286,6 @@ function init() {
   renderer.setSize( window.innerWidth, window.innerHeight );
   document.body.appendChild( renderer.domElement );
   window.addEventListener( 'resize', onWindowResize, false );
-
-  //ORBITCONTROL
-  // controls = new THREE.OrbitControls(camera, document, renderer.domElement);
 }
 
 function onWindowResize() {
@@ -282,9 +297,7 @@ function onWindowResize() {
 //POINTERLOCK
 function onDocumentMouseDown( event ) {
   event.preventDefault();
-
   raycaster.ray.origin.copy( controls.getObject().position );
-  // raycaster.ray.origin.y -= 10;
   raycaster.setFromCamera( mouse, camera );
   let intersects = raycaster.intersectObjects( objects );
   if(intersects.length > 0) {
@@ -322,74 +335,106 @@ function animate() {
 
     velocity.x -= velocity.x * 5.8 * delta;
     velocity.z -= velocity.z * 5.8 * delta;
-    velocity.y -= 9.8 * 100.0 * delta; // 100 = mass
 
     direction.z = Number( moveForward ) - Number( moveBackward );
     direction.x = Number( moveLeft ) - Number( moveRight );
     direction.normalize();
 
-    if ( moveForward || moveBackward ) velocity.z -= direction.z * 400.0 * delta;
-    if ( moveLeft || moveRight ) velocity.x -= direction.x * 400.0 * delta;
+    if ( moveForward || moveBackward ) velocity.z -= direction.z * 600.0 * delta;
+    if ( moveLeft || moveRight ) velocity.x -= direction.x * 600.0 * delta;
 
     controls.getObject().translateX( velocity.x * delta );
     controls.getObject().position.y += ( velocity.y * delta ); // new behavior
     controls.getObject().translateZ( velocity.z * delta );
 
-    if ( controls.getObject().position.y < 50 ) {
-      velocity.y = 0;
-      controls.getObject().position.y = 50;
-    }
-
     prevTime = time;
 
-
-    // limit walking in map
-    if(camera.position.z >= 910) {
-      camera.position.z = 910;
-    }
-    if(camera.position.z < -910) {
-      camera.position.z = -910;
-    }
-    if(camera.position.x >= 910) {
-      camera.position.x = 910;
-    }
-    if(camera.position.x < -910) {
-      camera.position.x = -910;
-    }
-
-
-    //RAIN ANIMATION
-    function simulateRain() {
-      let pCount = rainParticleCount;
+    //GEMSTONE PARTICLES ANIMATION
+    function simulateGemstoneParticles() {
+      let pCount = gemstoneParticleCount;
       while (pCount--) {
-      let rainParticle = rainParticles.vertices[pCount];
-      if (rainParticle.y < 10) {
-        rainParticle.y = 100;
-        rainParticle.velocity.y = 0;
+      let gemstoneParticle = gemstoneParticles.vertices[pCount];
+      if(gemstoneParticle.y > 330) {
+        gemstoneParticle.y = 55;
       }
-      rainParticle.velocity.y -= Math.random() * 0.7;
-      rainParticle.y += rainParticle.velocity.y;
+      gemstoneParticle.y += 0.6;
       }
-      rainParticles.verticesNeedUpdate = true;
+      gemstoneParticles.verticesNeedUpdate = true;
     };
-    // particleSystem.rotation.y += 0.0015;
-    simulateRain();
-
-    //MAGIC PARTICLES ANIMATION
-
-    function simulateMagicParticles() {
-      let pCount = magicParticleCount;
-      while (pCount--) {
-      let magicParticle = magicParticles.vertices[pCount];
-      if(magicParticle.y > 120) {
-        magicParticle.y = 20;
-      }
-      magicParticle.y += 0.07;
-      }
-      magicParticles.verticesNeedUpdate = true;
-    };
-    // particleSystem.rotation.y += 0.0015;
-    simulateMagicParticles();
+    simulateGemstoneParticles();
   }
+
+  // limit whole map
+  if(camera.position.z >= 910) {
+    camera.position.z = 910;
+  }
+  if(camera.position.z < -910) {
+    camera.position.z = -910;
+  }
+  if(camera.position.x >= 910) {
+    camera.position.x = 910;
+  }
+  if(camera.position.x < -910) {
+    camera.position.x = -910;
+  }
+
+  // limit castle
+  if(camera.position.x > 410 && camera.position.z > 440) {
+    camera.position.x = 410;
+  }
+  if(camera.position.x > 420 && camera.position.z > 430) {
+    camera.position.z = 430;
+  }
+
+  // limit stones
+  if(camera.position.x < -565 && camera.position.z < -175 && camera.position.x > -790) {
+    camera.position.x = -565;
+  }
+  if(camera.position.x < -570  && camera.position.z < -170 && camera.position.x > -790) {
+    camera.position.z = -170;
+  }
+  if(camera.position.x > -795  && camera.position.z < -170 && camera.position.x < -575) {
+    camera.position.x = -795;
+  }
+
+  // camera.position.x > -620 &&
+  // if(camera.position.x > 420 && camera.position.z > 430) {
+  //   camera.position.z = 430;
+  // }
+  // console.log(camera.position.x)
+  // console.log(camera.position.z)
+
+
+  //RAIN ANIMATION
+  function simulateRain() {
+    let pCount = rainParticleCount;
+    while (pCount--) {
+    let rainParticle = rainParticles.vertices[pCount];
+    if (rainParticle.y < 10) {
+      rainParticle.y = 100;
+      rainParticle.velocity.y = 0;
+    }
+    rainParticle.velocity.y -= Math.random() * 0.7;
+    rainParticle.y += rainParticle.velocity.y;
+    }
+    rainParticles.verticesNeedUpdate = true;
+  };
+  simulateRain();
+
+
+  //MAGIC PARTICLES ANIMATION
+  function simulateMagicParticles() {
+    let pCount = magicParticleCount;
+    while (pCount--) {
+    let magicParticle = magicParticles.vertices[pCount];
+    if(magicParticle.y > 120) {
+      magicParticle.y = 20;
+    }
+    magicParticle.y += 0.07;
+    }
+    magicParticles.verticesNeedUpdate = true;
+  };
+  simulateMagicParticles();
+
   renderer.render( scene, camera );
 }
