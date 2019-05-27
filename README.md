@@ -30,8 +30,8 @@ three.js
 
 Tester from our class:
 - [Mikael Ravantti](https://github.com/MRavantti)
-- 
-- 
+- [Lovisa Hallgren](https://github.com/lovisahallgren)
+- [Rebecca Klaening](https://github.com/RebeccaKlaening)
 
 Testers without programming knowledge:
 - Raghd Shokai
