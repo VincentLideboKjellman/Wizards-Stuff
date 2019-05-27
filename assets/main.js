@@ -262,7 +262,7 @@ function init() {
       let secs = Math.floor((((timeDifference % (secondsInADay)) % (secondsInAHour)) % (60 * 1000)) / 1000 * 1);
 
       if(!winGame) {
-        console.log(secs)
+        // console.log(secs)
         clearTimeout(countUpFromTime.interval);
         countUpFromTime.interval = setTimeout(function(){ countUpFromTime(countFrom, id); }, 1000);
       }
