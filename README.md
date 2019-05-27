@@ -43,8 +43,8 @@ We take no credit for the models and sound
 
 ## Pull request log:
 
-<!-- - [#1 Update to this.tomato instead of const + adding update function](https://github.com/linn2punkt0/Come-on-tomato/pull/1)
-- [#2 Tomato](https://github.com/linn2punkt0/Come-on-tomato/pull/2) 
+- [#1 Added skybox](https://github.com/VincentLideboKjellman/The-Fall/pull/1)
+- [#2 Added Rain Effect](https://github.com/VincentLideboKjellman/The-Fall/pull/2) 
 - [#3 added images and rat.js](https://github.com/linn2punkt0/Come-on-tomato/pull/3) 
 - [#4 Rats](https://github.com/linn2punkt0/Come-on-tomato/pull/4)
 - [#5 Tomato](https://github.com/linn2punkt0/Come-on-tomato/pull/5)
@@ -60,4 +60,4 @@ We take no credit for the models and sound
 - [#15 Tomato](https://github.com/linn2punkt0/Come-on-tomato/pull/15)
 - [#16 Merge pull request #15 from linn2punkt0/Tomato](https://github.com/linn2punkt0/Come-on-tomato/pull/16)
 - [#17 Rats](https://github.com/linn2punkt0/Come-on-tomato/pull/17)
-- [#18 Merge pull request #17 from linn2punkt0/rats](https://github.com/linn2punkt0/Come-on-tomato/pull/18) -->
+- [#18 Merge pull request #17 from linn2punkt0/rats](https://github.com/linn2punkt0/Come-on-tomato/pull/18)
