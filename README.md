@@ -37,7 +37,7 @@ Testers without programming knowledge:
 - Raghd Shokai
 - Isabella Kostic
 - Bryan Strömberg
-- 
+- Michelle Andersson
 - 
 
 ## Feedback from Group 07
