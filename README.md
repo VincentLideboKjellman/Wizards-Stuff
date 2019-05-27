@@ -4,7 +4,7 @@
 <img width="50%" src="https://github.com/VincentLideboKjellman/The-Fall/blob/master/images/forReadme/screen1.png?raw=true">
 <img width="50%" src="https://github.com/VincentLideboKjellman/The-Fall/blob/master/images/forReadme/screen4.png?raw=true">
 <img width="50%" src="https://github.com/VincentLideboKjellman/The-Fall/blob/master/images/forReadme/screen2.png?raw=true">
-<img width="50%" src="https://github.com/VincentLideboKjellman/The-Fall/blob/master/images/forReadme/screen3.png?raw=true">
+<img width="50%" src="https://github.com/VincentLideboKjellman/The-Fall/blob/master/images/forReadme/screen5.png?raw=true">
 </div>
 
 ### The Arch wizard keeps loosing his staff, you have to find it for him while exploring the calm but eerie garden.
@@ -42,6 +42,7 @@ Testers without programming knowledge:
 We take no credit for the models and sound
 
 ## Pull request log:
+
 <!-- - [#1 Update to this.tomato instead of const + adding update function](https://github.com/linn2punkt0/Come-on-tomato/pull/1)
 - [#2 Tomato](https://github.com/linn2punkt0/Come-on-tomato/pull/2) 
 - [#3 added images and rat.js](https://github.com/linn2punkt0/Come-on-tomato/pull/3) 
