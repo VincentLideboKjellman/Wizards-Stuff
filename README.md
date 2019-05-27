@@ -31,8 +31,8 @@ Tester from our class:
 
 Testers without programming knowledge:
 - Raghd Shokai
-- 
-- 
+- Isabella Kostic
+- Bryan Strömberg
 - 
 - 
 
