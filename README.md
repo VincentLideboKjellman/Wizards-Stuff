@@ -1,7 +1,7 @@
 # Wizards Stuff
 
 <!-- <img src="https://media.giphy.com/media/101t9QwTM6y5oc/giphy.gif"/>  -->
-![alt text](https://github.com/VincentLideboKjellman/The-Fall/blob/master/images/forReadme/screen3.png?raw=true)
+<img width="50%" src="https://github.com/VincentLideboKjellman/The-Fall/blob/master/images/forReadme/screen1.png?raw=true">
 
 
 ### The Arch wizard keeps loosing his staff, you have to find it for him while exploring the calm but eerie garden.
