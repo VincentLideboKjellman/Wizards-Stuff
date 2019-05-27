@@ -13,9 +13,9 @@ var stonesSound = new THREE.PositionalAudio( stonesListener );
 
 audioLoader.load( 'assets/sounds/stones.wav', function ( buffer ) {
 	stonesSound.setBuffer( buffer );
-    stonesSound.setRefDistance( 20 );
+    stonesSound.setRefDistance( 30 );
     stonesSound.setLoop( true );
-	stonesSound.setVolume( 1 );
+	stonesSound.setVolume( 1.2 );
 	stonesSound.play();
 } );
 

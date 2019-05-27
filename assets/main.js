@@ -17,6 +17,7 @@ let color = new THREE.Color();
 
 let mouse = new THREE.Vector2(), INTERSECTED;
 let winGame = false;
+let pausedGame = false;
 
 // RAIN VARIABLES
 let particleSystem, pMaterial
@@ -54,8 +55,9 @@ let smallStone3Radius = 40;
 let smallStone3Theta = 0;
 let smallStone3DTheta = 2 * Math.PI / 800;
 
+let score;
 
-// let dateTime;
+
 
 init();
 animate();
@@ -218,7 +220,7 @@ function init() {
   scene = new THREE.Scene();
   scene.background = new THREE.Color( 0x000000 );
   scene.fog = new THREE.Fog( 0x000000, 0, 500 );
-  let light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 1 );
+  let light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 0.85 );
   light.position.set( 0.5, 1, 0.75 );
   scene.add( light );
 
@@ -241,20 +243,78 @@ function init() {
   startText.addEventListener( 'click', function () {
     controls.lock();
 
-    //count up timer
-    let isGameStartedTimer = true;
+    // TIME
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date+' '+time;
+    countUpFromTime(dateTime, 'countup1');
 
-    if(isGameStartedTimer){
-      let today = new Date();
-      let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-      let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-      let dateTime = date+' '+time;
-      // countUpFromTime(dateTime, 'countup1');
-    }
-      if(winGame){
-        isGameStartedTimer = false;
+    function countUpFromTime(countFrom, id) {
+      countFrom = new Date(countFrom).getTime();
+      var now = new Date(),
+          countFrom = new Date(countFrom),
+          timeDifference = (now - countFrom);
+
+      var secondsInADay = 60 * 60 * 1000 * 24,
+          secondsInAHour = 60 * 60 * 1000;
+
+      let secs = Math.floor((((timeDifference % (secondsInADay)) % (secondsInAHour)) % (60 * 1000)) / 1000 * 1);
+
+      if(!winGame) {
+        console.log(secs)
+        clearTimeout(countUpFromTime.interval);
+        countUpFromTime.interval = setTimeout(function(){ countUpFromTime(countFrom, id); }, 1000);
       }
+
+      if(winGame) {
+        if(secs > 300) {
+          secs = 300;
+        }
+        score = 300 - secs;
+        let scoreCollected = document.querySelector('.score');
+        scoreCollected.innerHTML = score;
+
+        let hatScore1 = document.querySelector('.hat1');
+        let hatScore2 = document.querySelector('.hat2');
+        let hatScore3 = document.querySelector('.hat3');
+        let hatScore4 = document.querySelector('.hat4');
+        let hatScore5 = document.querySelector('.hat5');
+        let scoreComment = document.querySelector('.score-comment');
+
+        if(score >= 0) {
+          setTimeout(function(){
+            hatScore1.style.display = 'initial';
+          }, 500);
+        }
+        if(score > 120) {
+          setTimeout(function(){
+            hatScore2.style.display = 'initial';
+          }, 1000);
+        }
+        if(score > 200) {
+          setTimeout(function(){
+            hatScore3.style.display = 'initial';
+          }, 1500);
+        }
+        if(score > 240) {
+          setTimeout(function(){
+            hatScore4.style.display = 'initial';
+          }, 2000);
+        }
+        if(score > 270) {
+          setTimeout(function(){
+            hatScore5.style.display = 'initial';
+          }, 2500);
+        }
+      }
+  };
+
+
+
+
   }, false );
+
 
   keepPlaying.addEventListener( 'click', function () {
     controls.lock();
@@ -268,6 +328,8 @@ function init() {
     pause.style.display = 'none';
     controls.lock();
     camera.position.y = 50;
+
+    pausedGame = false;
 
     if(winGame) {
       win.style.display = 'initial';
@@ -284,6 +346,8 @@ function init() {
     mouseImage.style.display = 'none';
     startText.style.display = 'initial';
 
+    pausedGame = true;
+
     if(winGame) {
       pause.style.display = 'none';
     } else {
@@ -291,6 +355,10 @@ function init() {
     }
   } );
   scene.add( controls.getObject() );
+
+
+
+
 
 
   // KEY MOVEMENT
@@ -370,7 +438,7 @@ function init() {
   let loader = new THREE.TextureLoader();
   loader.crossOrigin = '';
   //RAIN
-  rainParticleCount = 7000;
+  rainParticleCount = 5000;
   pMaterial = new THREE.PointsMaterial({
     color: 0xFFFFFF,
     size: 4,
@@ -513,6 +581,7 @@ function animate() {
     let delta = ( time - prevTime ) / 1000;
     velocity.x -= velocity.x * 5.8 * delta;
     velocity.z -= velocity.z * 5.8 * delta;
+    // console.log(time)
 
     direction.z = Number( moveForward ) - Number( moveBackward );
     direction.x = Number( moveLeft ) - Number( moveRight );

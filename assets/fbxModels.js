@@ -332,7 +332,7 @@
       rock.position.y = -2;
       rock.position.z = Math.floor( Math.random() * 20 - 10 ) * 50 + 50;
       rock.rotation.y = Math.floor(Math.random() * 5);
-      rock.scale.set(1.2,1.2,1.2);
+      rock.scale.set(0.6,0.6,0.6);
       scene.add(rock);
     });
   }

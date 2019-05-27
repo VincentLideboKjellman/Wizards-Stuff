@@ -20,7 +20,7 @@
 		<!-- count up end -->
 
 		<div class="mouse">
-			<!-- <img width="34" height="34" src="http://www.sccpre.cat/png/big/2/24577_mouse-cursor-png.png" alt="mep"> -->
+			<img width="50" height="50" style="opacity: 0.6; margin-left: -25px; margin-top: -25px;" src="images/cursor.png" alt="cursor">
 		</div>
 
 		<img class="start-image" src="images/frontImage.png" alt="startpic">
@@ -33,7 +33,7 @@
 			<!-- progress bar -->
 			<div class="progress-wrapper">
 				<div class="percent-wrapper">
-					<p class="start-text">Start</p>
+					<p class="start-text">Play Game</p>
 					<p id="loadingCount" class="loading-count"> Loading </p>
 					<p id="percentCount" class="percent-count"> 0% </p>
 				</div>
@@ -62,13 +62,16 @@
 
 		<div class="win">
 			<div class="win-text-wrapper">
-				<p>You won!</p>
-				<p>Your score: <span class="score">10</span></p>
-				<p>Your time: <span class="win-time">1 min 2s</span></p>
+				<p>You found it!</p>
+				<p>Your score: <span class="score"></span></p>
 
 				<div class="hat-score">
+					<img class="hat1" style="width: 70px; margin: 10px 10px 40px; display: none;" src="images/hatIcon.png" alt="play again button">
+					<img class="hat2" style="width: 70px; margin: 10px 10px 40px; display: none;" src="images/hatIcon.png" alt="play again button">
+					<img class="hat3" style="width: 70px; margin: 10px 10px 40px; display: none;" src="images/hatIcon.png" alt="play again button">
+					<img class="hat4" style="width: 70px; margin: 10px 10px 40px; display: none;" src="images/hatIcon.png" alt="play again button">
+					<img class="hat5" style="width: 70px; margin: 10px 10px 40px; display: none;" src="images/hatIcon.png" alt="play again button">
 				</div>
-
 				<div class="play-again-container">
 					<img class="play-again" style="width: 70px" src="images/playagain.png" alt="play again button">
 				</div>
@@ -98,7 +101,6 @@
 		<script src="assets/stoneSound.js"></script>
 
 		<!-- Highscore -->
-		<script src="assets/timer.js"></script>
 
 		<!-- <script src="js/ParticleEngine.js" ></script>
 		<script src="js/ParticleEngineExamples.js"></script> -->

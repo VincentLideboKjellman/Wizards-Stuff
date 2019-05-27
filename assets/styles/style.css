@@ -119,13 +119,19 @@ body {
   margin: 0;
   cursor: pointer;
   text-shadow: -5px 5px 0px black;
+  transition: 0.3s;
+}
+
+.start-text:hover {
+  transform: scale(1.2);
+  color: #e1d6ff;
 }
 
 .pause {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0,0,0,0.6);
   display: none;
   align-items: center;
   justify-content: center;
@@ -217,12 +223,6 @@ body {
 .win-text-wrapper p:nth-child(3) {
   font-size: 50px;
   text-shadow: -5px 5px 0px black;
-}
-
-.score {
-}
-
-.win-time {
 }
 
 .hat-score {
