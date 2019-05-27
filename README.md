@@ -33,7 +33,7 @@ Tester from our class:
 - [Lovisa Hallgren](https://github.com/lovisahallgren)
 - [Rebecca Klaening](https://github.com/RebeccaKlaening)
 
-Testers without programming knowledge:
+Outside Testers:
 - Raghd Shokai
 - Isabella Kostic
 - Bryan Strömberg
