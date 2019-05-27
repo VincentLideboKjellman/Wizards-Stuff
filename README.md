@@ -7,9 +7,13 @@
 <img style="margin:0;" width="49%" height="260" src="https://github.com/VincentLideboKjellman/Wizards-Stuff/blob/master/images/forReadme/screen5.png?raw=true">
 </div>
 
-### The Arch wizard keeps loosing his staff, you have to find it for him while exploring the calm but eerie garden.
-
+### Introduction
+The Arch wizard keeps loosing his staff, you have to find it for him while exploring the calm but eerie garden.
 Navigate with w,a,s,d and left click on the staff to win (when you find it)
+
+### Built using
+JavaScript
+three.js
 
 #### Play online here: https://wizardsstuff.netlify.com/
 
@@ -51,3 +55,5 @@ We take no credit for the models and sound
 - [#10 Added more particles and animation](https://github.com/VincentLideboKjellman/Wizards-Stuff/pull/10)
 - [#24 Added border limits](https://github.com/VincentLideboKjellman/Wizards-Stuff/pull/24)
 
+
+- [Feedback to Group 08 pull request](https://github.com/Raademar/snowboarding_extreme_champions/pull/17)
