@@ -7,9 +7,13 @@
 <img style="margin:0;" width="49%" height="260" src="https://github.com/VincentLideboKjellman/Wizards-Stuff/blob/master/images/forReadme/screen5.png?raw=true">
 </div>
 
-### The Arch wizard keeps loosing his staff, you have to find it for him while exploring the calm but eerie garden.
-
+### Introduction
+The Arch wizard keeps loosing his staff, you have to find it for him while exploring the calm but eerie garden.
 Navigate with w,a,s,d and left click on the staff to win (when you find it)
+
+### Built using
+JavaScript
+three.js
 
 #### Play online here: https://wizardsstuff.netlify.com/
 
@@ -29,16 +33,15 @@ Navigate with w,a,s,d and left click on the staff to win (when you find it)
 Tester from our class:
 
 - [Mikael Ravantti](https://github.com/MRavantti)
--
--
+- [Lovisa Hallgren](https://github.com/lovisahallgren)
+- [Rebecca Klaening](https://github.com/RebeccaKlaening)
 
-Testers without programming knowledge:
-
+Outside Testers:
 - Raghd Shokai
 - Isabella Kostic
 - Bryan Strömberg
--
--
+- Michelle Andersson
+- 
 
 ## Feedback from Group 07
 
@@ -61,21 +64,13 @@ We take no credit for the models and sound
 
 ## Pull request log:
 
-- [#1 Added skybox](https://github.com/VincentLideboKjellman/The-Fall/pull/1)
-- [#2 Added Rain Effect](https://github.com/VincentLideboKjellman/The-Fall/pull/2)
-- [#3 added images and rat.js](https://github.com/linn2punkt0/Come-on-tomato/pull/3)
-- [#4 Rats](https://github.com/linn2punkt0/Come-on-tomato/pull/4)
-- [#5 Tomato](https://github.com/linn2punkt0/Come-on-tomato/pull/5)
-- [#6 Correcting spelling error](https://github.com/linn2punkt0/Come-on-tomato/pull/6)
-- [#7 added collide-function to rats](https://github.com/linn2punkt0/Come-on-tomato/pull/7)
-- [#8 Modified tomato jumping](https://github.com/linn2punkt0/Come-on-tomato/pull/8)
-- [#9 made rat move](https://github.com/linn2punkt0/Come-on-tomato/pull/9)
-- [#10 Rats](https://github.com/linn2punkt0/Come-on-tomato/pull/10)
-- [#11 pull updates to branch](https://github.com/linn2punkt0/Come-on-tomato/pull/11)
-- [#12 Update from master](https://github.com/linn2punkt0/Come-on-tomato/pull/12)
-- [#13 Merge pull request #12 from linn2punkt0/master](https://github.com/linn2punkt0/Come-on-tomato/pull/13)
-- [#14 Update from master](https://github.com/linn2punkt0/Come-on-tomato/pull/14)
-- [#15 Tomato](https://github.com/linn2punkt0/Come-on-tomato/pull/15)
-- [#16 Merge pull request #15 from linn2punkt0/Tomato](https://github.com/linn2punkt0/Come-on-tomato/pull/16)
-- [#17 Rats](https://github.com/linn2punkt0/Come-on-tomato/pull/17)
-- [#18 Merge pull request #17 from linn2punkt0/rats](https://github.com/linn2punkt0/Come-on-tomato/pull/18)
+- [#1 Added skybox](https://github.com/VincentLideboKjellman/Wizards-Stuff/pull/1)
+- [#2 Added Rain Effect](https://github.com/VincentLideboKjellman/Wizards-Stuff/pull/2) 
+- [#3 Added Rain sound and image](https://github.com/VincentLideboKjellman/Wizards-Stuff/pull/3) 
+- [#4 Added positional fireplace and raven sounds and a particle effect](https://github.com/VincentLideboKjellman/Wizards-Stuff/pull/4)
+- [#5 Changed magic particles code to be more congruent](https://github.com/VincentLideboKjellman/Wizards-Stuff/pull/5)
+- [#10 Added more particles and animation](https://github.com/VincentLideboKjellman/Wizards-Stuff/pull/10)
+- [#24 Added border limits](https://github.com/VincentLideboKjellman/Wizards-Stuff/pull/24)
+
+
+- [Feedback to Group 08 pull request](https://github.com/Raademar/snowboarding_extreme_champions/pull/17)
